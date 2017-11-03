@@ -1,21 +1,18 @@
-# yt-devmeetup-vue
+# Retorno Programado
 
-A dev meetup application built with Vue + Vuetify + Firebase.
+Uma aplicação em Vue.JS para controle de retorno de pacientes.
 
 ## Build Setup
 
 ``` bash
-# install dependencies
+# Instale as dependências.
 npm install
 
-# serve with hot reload at localhost:8080
+# Desenvolva com Hot Reloading.
 npm run dev
 
-# build for production with minification
+# Build para produção.
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Para mais detalhes, entre em contato via e-mail (extraxt@gmail.com).
