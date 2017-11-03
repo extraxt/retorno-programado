@@ -6,6 +6,7 @@ import CreateMeetup from '@/components/Meetup/CreateMeetup'
 import Signup from '@/components/User/Signup'
 import Signin from '@/components/User/Signin'
 import Meetup from '@/components/Meetup/Meetup'
+import Pacientes from '@/components/Pacientes/Pacientes'
 import AuthGuard from './auth-guard'
 import RegistrarGuard from './registrar-guard'
 
@@ -47,6 +48,12 @@ export default new Router({
       path: '/entrar',
       name: 'Entrar',
       component: Signin
+    },
+    {
+      path: '/pacientes',
+      name: 'Pacientes',
+      component: Pacientes,
+      beforeEnter: AuthGuard
     }
   ],
   mode: 'history'

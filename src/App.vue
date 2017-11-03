@@ -51,7 +51,7 @@
     <main>
       <router-view></router-view>
     </main>
-    <v-footer>
+    <v-footer fixed>
       <p>Desenvolvido por Rafael de Oliveira.</p>
     </v-footer>
   </v-app>
@@ -72,9 +72,9 @@
         ]
         if (this.usuarioEstaAutenticado) {
           menuItems = [
-            {icone: 'supervisor_account', titulo: 'Todos os Retornos', link: '/meetups'},
-            {icone: 'room', titulo: 'Novo Retorno', link: '/meetup/new'},
-            {icone: 'person', titulo: 'Pacientes', link: '/profile'}
+            {icone: 'line_weight', titulo: 'Todos os Retornos', link: '/meetups'},
+            {icone: 'note_add', titulo: 'Novo Retorno', link: '/meetup/new'},
+            {icone: 'account_box', titulo: 'Pacientes', link: '/pacientes'}
           ]
         }
         return menuItems
