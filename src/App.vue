@@ -1,0 +1,96 @@
+<template>
+  <v-app class="application--toolbar application--footer application--footer-fixed">
+    <v-navigation-drawer temporary app dark v-model="sideNav">
+      <v-list>
+        <v-list-tile
+          v-for="item in menuItems"
+          :key="item.titulo"
+          :to="item.link">
+          <v-list-tile-action>
+            <v-icon>{{ item.icone }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>{{ item.titulo }}</v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile
+          v-if="usuarioEstaAutenticado"
+          @click="onLogout">
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>Sair</v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar dark class="primary">
+      <span class="hidden-md-and-up">
+        <v-toolbar-side-icon
+        @click.stop="sideNav = !sideNav"></v-toolbar-side-icon>  
+      </span>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" style="cursor: pointer">Retorno App</router-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn
+          flat
+          v-for="item in menuItems"
+          :key="item.titulo"
+          :to="item.link">
+          <v-icon left dark>{{ item.icone }}</v-icon>
+          {{ item.titulo }}
+        </v-btn>
+        <v-btn
+          v-if="usuarioEstaAutenticado"
+          flat
+          @click="onLogout">
+          <v-icon left dark>exit_to_app</v-icon>
+          Sair
+        </v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+    <main>
+      <router-view></router-view>
+    </main>
+    <v-footer>
+      <p>Desenvolvido por Rafael de Oliveira.</p>
+    </v-footer>
+  </v-app>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        sideNav: false
+      }
+    },
+    computed: {
+      menuItems () {
+        let menuItems = [
+          {icone: 'face', titulo: 'Cadastre-se', link: '/registrar'},
+          {icone: 'lock_open', titulo: 'Entrar', link: '/entrar'}
+        ]
+        if (this.usuarioEstaAutenticado) {
+          menuItems = [
+            {icone: 'supervisor_account', titulo: 'Todos os Retornos', link: '/meetups'},
+            {icone: 'room', titulo: 'Novo Retorno', link: '/meetup/new'},
+            {icone: 'person', titulo: 'Pacientes', link: '/profile'}
+          ]
+        }
+        return menuItems
+      },
+      usuarioEstaAutenticado () {
+        return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+      }
+    },
+    methods: {
+      onLogout () {
+        this.$store.dispatch('logout')
+      }
+    }
+  }
+</script>
+
+<style lang="stylus">
+  @import './stylus/main'
+</style>
