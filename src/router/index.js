@@ -7,6 +7,7 @@ import Signup from '@/components/User/Signup'
 import Signin from '@/components/User/Signin'
 import Meetup from '@/components/Meetup/Meetup'
 import Pacientes from '@/components/Pacientes/Pacientes'
+import NovoPaciente from '@/components/Pacientes/NovoPaciente'
 import AuthGuard from './auth-guard'
 import RegistrarGuard from './registrar-guard'
 
@@ -53,6 +54,12 @@ export default new Router({
       path: '/pacientes',
       name: 'Pacientes',
       component: Pacientes,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/novopaciente',
+      name: 'Novo Paciente',
+      component: NovoPaciente,
       beforeEnter: AuthGuard
     }
   ],

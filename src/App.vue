@@ -1,6 +1,6 @@
 <template>
   <v-app class="application--toolbar application--footer application--footer-fixed">
-    <v-navigation-drawer temporary app dark v-model="sideNav">
+    <v-navigation-drawer temporary app dark v-model="sideNav" width="200">
       <v-list>
         <v-list-tile
           v-for="item in menuItems"
