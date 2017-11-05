@@ -142,7 +142,8 @@
             <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2>
               <v-btn
                 class="primary"
-                type="submit">Cadastrar Paciente</v-btn>
+                type="submit"
+                :disabled="!formValido">Cadastrar Paciente</v-btn>
             </v-flex>
           </v-layout>
           <br><br><br>
@@ -177,11 +178,25 @@ export default {
       pacobs: ''
     }
   },
+  computed: {
+    formEhValido () {
+      return this.pacnome !== '' &&
+      this.paccodigo !== '' &&
+      this.pactelefone1 !== '' &&
+      this.pacteletipo1 !== '' &&
+      this.paccidade !== '' &&
+      this.pacestado !== '' &&
+      this.pacdatanasc !== ''
+    }
+  },
   directives: {
     mask: AwesomeMask
   },
   methods: {
     onNovoPaciente () {
+      if (!this.formEhValido) {
+        return
+      }
       const dadosPaciente = {
         pacsexo: this.pacsexo,
         pacnome: this.pacnome,
