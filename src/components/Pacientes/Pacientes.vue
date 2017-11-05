@@ -10,7 +10,7 @@
       <v-flex xs12 md6 offset-md3>
         <v-card>
           <v-list>
-            <v-list-tile avatar v-for="paciente in pacientes" :key="paciente.nome">
+            <v-list-tile avatar v-for="paciente in todosPacientes" :key="paciente.id">
                 <v-list-tile-content>
                     <v-list-tile-title v-text="paciente.nome"></v-list-tile-title>
                 </v-list-tile-content>
@@ -24,22 +24,9 @@
 
 <script>
   export default {
-    data () {
-      return {
-        pacientes: [
-          {nome: 'Joaquim Teixeira'},
-          {nome: 'Maria Joaquina'},
-          {nome: 'Marcos Abreu'},
-          {nome: 'Florentina Camargo'},
-          {nome: 'Manuel Florenal'},
-          {nome: 'Manuel Florenal'},
-          {nome: 'Manuel Florenal'},
-          {nome: 'Manuel Florenal'},
-          {nome: 'Manuel Florenal'},
-          {nome: 'Manuel Florenal'},
-          {nome: 'Manuel Florenal'},
-          {nome: 'Manuel Florenal'}
-        ]
+    computed: {
+      todosPacientes () {
+        return this.$store.getters.todosPacientes
       }
     }
   }

@@ -1,6 +1,14 @@
 import * as firebase from 'firebase'
 
 export default {
+  state: {
+    todosPacientes: []
+  },
+  mutations: {
+    todosPacientes (state, payload) {
+      state.todosPacientes = payload
+    }
+  },
   actions: {
     criarPaciente ({commit, getters}, payload) {
       commit('setLoading', true)
@@ -30,6 +38,44 @@ export default {
         console.log(error)
         commit('setLoading', false)
       })
+    },
+    todosPacientes ({commit, getters}) {
+      commit('setLoading', true)
+      const usuarioId = getters.user.id
+      firebase.database().ref(usuarioId + '/pacientes').once('value')
+      .then((data) => {
+        const todosPacientes = []
+        const obj = data.val()
+        for (let key in obj) {
+          todosPacientes.push({
+            id: key,
+            nome: obj[key].nome,
+            codigo: obj[key].codigo,
+            telefone1: obj[key].telefone1,
+            teletipo1: obj[key].teletipo1,
+            telefone2: obj[key].telefone2,
+            teletipo2: obj[key].teletipo2,
+            email: obj[key].email,
+            endereco: obj[key].endereco,
+            cidade: obj[key].cidade,
+            estado: obj[key].estado,
+            sexo: obj[key].sexo,
+            datanasc: obj[key].datanasc,
+            obs: obj[key].obs
+          })
+        }
+        commit('todosPacientes', todosPacientes)
+        commit('setLoading', false)
+      })
+      .catch((error) => {
+        console.log(error)
+        commit('setLoading', false)
+      })
+    }
+  },
+  getters: {
+    todosPacientes (state) {
+      return state.todosPacientes
     }
   }
 }
