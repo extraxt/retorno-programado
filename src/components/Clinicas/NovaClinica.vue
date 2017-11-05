@@ -130,7 +130,7 @@ import AwesomeMask from 'awesome-mask'
 export default {
   data () {
     return {
-      teletipos: ['WhatsApp', 'Celular', 'Casa', 'Trabalho'],
+      teletipos: ['Fixo', 'Celular'],
       estados: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
       telefone: '(99)999999999',
       clinnome: '',
@@ -175,6 +175,8 @@ export default {
         clinobs: this.clinobs
       }
       console.log(dadosClinica)
+      this.$store.dispatch('criarClinica', dadosClinica)
+      this.$router.push('/')
     }
   }
 }
