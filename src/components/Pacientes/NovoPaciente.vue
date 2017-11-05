@@ -179,7 +179,7 @@ export default {
     }
   },
   computed: {
-    formEhValido () {
+    formValido () {
       return this.pacnome !== '' &&
       this.paccodigo !== '' &&
       this.pactelefone1 !== '' &&
