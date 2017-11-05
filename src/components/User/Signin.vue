@@ -39,7 +39,7 @@
                 </v-layout>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-btn type="submit" :disabled="loading" :loading="loading">
+                    <v-btn type="submit" :disabled="!formValido" :loading="loading">
                       Entrar
                        <span slot="loader" class="custom-loader">
                         <v-icon light>cached</v-icon>
@@ -65,6 +65,10 @@
       }
     },
     computed: {
+      formValido () {
+        return this.email !== '' &&
+        this.password !== ''
+      },
       user () {
         return this.$store.getters.user
       },

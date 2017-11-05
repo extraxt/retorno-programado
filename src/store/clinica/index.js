@@ -3,6 +3,7 @@ import * as firebase from 'firebase'
 export default {
   actions: {
     criarClinica ({commit, getters}, payload) {
+      commit('setLoading', true)
       const usuarioId = getters.user.id
       const dadosClinica = {
         usuarioId: usuarioId,
@@ -17,14 +18,16 @@ export default {
         estado: payload.clinestado,
         obs: payload.clinobs
       }
-      firebase.database().ref('/usuarios/' + usuarioId + '/clinicas').push(dadosClinica)
+      firebase.database().ref(usuarioId + '/clinicas').push(dadosClinica)
       .then(data => {
         console.log('Deu certo o registro!')
         console.log(data)
+        commit('setLoading', false)
       }
       )
       .catch(error => {
         console.log(error)
+        commit('setLoading', false)
       }
       )
     }

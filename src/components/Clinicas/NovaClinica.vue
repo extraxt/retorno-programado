@@ -111,7 +111,12 @@
               <v-btn
                 class="primary"
                 type="submit"
-                :disabled="!formValido">Cadastrar Clínica</v-btn>
+                :loading="loading"
+                :disabled="!formValido">Cadastrar Clínica
+                <span slot="loader" class="custom-loader">
+                  <v-icon light>cached</v-icon>
+                </span>
+              </v-btn>
             </v-flex>
           </v-layout>
           <br><br><br>
@@ -147,11 +152,14 @@ export default {
   },
   computed: {
     formValido () {
-      return this.pacnome !== '' &&
-      this.pactelefone1 !== '' &&
-      this.pacteletipo1 !== '' &&
-      this.paccidade !== '' &&
-      this.pacestado !== ''
+      return this.clinnome !== '' &&
+      this.clintelefone1 !== '' &&
+      this.clinteletipo1 !== '' &&
+      this.clincidade !== '' &&
+      this.clinestado !== ''
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   },
   directives: {

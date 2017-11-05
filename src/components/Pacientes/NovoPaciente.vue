@@ -146,7 +146,12 @@
               <v-btn
                 class="primary"
                 type="submit"
-                :disabled="!formValido">Cadastrar Paciente</v-btn>
+                :loading="loading"
+                :disabled="!formValido">Cadastrar Paciente
+                <span slot="loader" class="custom-loader">
+                  <v-icon light>cached</v-icon>
+                </span>
+              </v-btn>
             </v-flex>
           </v-layout>
           <br><br><br>
@@ -193,6 +198,9 @@ export default {
       this.paccidade !== '' &&
       this.pacestado !== '' &&
       this.pacdatanasc !== ''
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   },
   directives: {
@@ -219,6 +227,8 @@ export default {
         pacobs: this.pacobs
       }
       console.log(dadosPaciente)
+      this.$store.dispatch('criarPaciente', dadosPaciente)
+      this.$router.push('/')
     }
   }
 }
