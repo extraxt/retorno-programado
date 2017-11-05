@@ -7,11 +7,12 @@
     </v-layout>
     <v-layout row>
       <v-flex xs12>
-        <form @submit.prevent="">
+        <form @submit.prevent="onNovoPaciente">
           <v-layout row>
             <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
               <v-text-field
                 name="nome"
+                v-model="pacnome"
                 label="Nome do Paciente"
                 id="nome"
                 required></v-text-field>
@@ -21,8 +22,10 @@
             <v-flex xs6 sm4 offset-sm1 md3 offset-md2 lg2 offset-lg2>
               <v-text-field
                 name="codigo"
+                v-model="paccodigo"
                 label="Cód. do Paciente"
                 id="codigo"
+                required
                 ></v-text-field>
             </v-flex>
           </v-layout>
@@ -30,26 +33,32 @@
             <v-flex xs8 sm6 offset-sm1 md4 offset-md2>
               <v-text-field
                 name="telefone1"
+                v-model="pactelefone1"
                 label="Telefone 1"
                 id="telefone1"
                 prepend-icon="phone"
+                v-mask="telefone"
                 required></v-text-field>
             </v-flex>
             <v-flex xs4 sm4>
-              <v-select v-bind:items="[{ text: 'WhatsApp' }, { text: 'Celular' }, { text: 'Casa' }, { text: 'Trabalho' }]" label="Tipo" required></v-select>
+              <v-select v-bind:items="teletipos" v-model="pacteletipo1" label="Tipo:" required>
+              </v-select>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs8 sm6 offset-sm1 md4 offset-md2>
               <v-text-field
                 name="telefone2"
+                v-model="pactelefone2"
                 label="Telefone 2"
                 id="telefone2"
                 prepend-icon="phone"
+                v-mask="telefone"
                 ></v-text-field>
             </v-flex>
             <v-flex xs4 sm4>
-              <v-select v-bind:items="[{ text: 'WhatsApp' }, { text: 'Celular' }, { text: 'Casa' }, { text: 'Trabalho' }]" label="Tipo"></v-select>
+              <v-select v-bind:items="teletipos" v-model="pacteletipo2" label="Tipo:">
+              </v-select>
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -59,6 +68,7 @@
                 label="E-Mail do Paciente"
                 id="email"
                 type="email"
+                v-model="pacemail"
                 placeholder="meu-email@gmail.com"
                 hint="Ex.: meu-email@gmail.com"
                 ></v-text-field>
@@ -70,18 +80,34 @@
                 name="endereco"
                 label="Endereço do Paciente"
                 id="endereco"
-                hint="Ex.: Rua das Flores, 123 - Centro - Lapa/PR"
+                v-model="pacendereco"
+                hint="Ex.: Rua das Flores, 123"
               ></v-text-field>
+            </v-flex>
+          </v-layout>
+          <v-layout row>
+            <v-flex xs8 sm6 offset-sm1 md4 offset-md2>
+              <v-text-field
+                name="cidade"
+                label="Cidade"
+                id="cidade"
+                v-model="paccidade"
+                hint="Ex.: Lapa"
+                required
+              ></v-text-field>
+            </v-flex>
+            <v-flex xs4 sm4>
+              <v-select v-model="pacestado" v-bind:items="estados" label="Estado" required></v-select>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
               <br>
               <p>Escolha o sexo:</p>
-              <v-radio-group v-model="sexo" required>
-                <v-radio label="Masculino" value="masculino" v-model="sexo"></v-radio>
+              <v-radio-group v-model="pacsexo" required>
+                <v-radio label="Masculino" value="masculino"></v-radio>
                 <br>
-                <v-radio label="Feminino" value="feminino" v-model="sexo"></v-radio>
+                <v-radio label="Feminino" value="feminino"></v-radio>
             </v-radio-group>
             <br>
             </v-flex>
@@ -92,7 +118,11 @@
                 name="datanasc"
                 label="Nascimento"
                 placeholder="Ex: 30/12/1970"
+                hint="Ex: 30/12/1970"
+                v-mask= "datanasc"
+                v-model="pacdatanasc"
                 id="datanasc"
+                required
               ></v-text-field>
             </v-flex>
           </v-layout>
@@ -102,6 +132,7 @@
                 name="observacoes"
                 label="Observações Gerais"
                 id="observacoes"
+                v-model="pacobs"
                 placeholder="Alguma informação a mais?"
                 multi-line
               ></v-text-field>
@@ -122,10 +153,51 @@
 </template>
 
 <script>
+import AwesomeMask from 'awesome-mask'
+
 export default {
   data () {
     return {
-      sexo: 'null'
+      teletipos: ['WhatsApp', 'Celular', 'Casa', 'Trabalho'],
+      estados: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
+      telefone: '(99)999999999',
+      datanasc: '99/99/9999',
+      pacsexo: 'masculino',
+      pacnome: '',
+      paccodigo: '',
+      pactelefone1: '',
+      pacteletipo1: '',
+      pactelefone2: '',
+      pacteletipo2: '',
+      pacemail: '',
+      pacendereco: '',
+      paccidade: '',
+      pacestado: '',
+      pacdatanasc: '',
+      pacobs: ''
+    }
+  },
+  directives: {
+    mask: AwesomeMask
+  },
+  methods: {
+    onNovoPaciente () {
+      const dadosPaciente = {
+        pacsexo: this.pacsexo,
+        pacnome: this.pacnome,
+        paccodigo: this.paccodigo,
+        pactelefone1: this.pactelefone1,
+        pacteletipo1: this.pacteletipo1,
+        pactelefone2: this.pactelefone2,
+        pacteletipo2: this.pacteletipo2,
+        pacemail: this.pacemail,
+        pacendereco: this.pacendereco,
+        paccidade: this.paccidade,
+        pacestado: this.pacestado,
+        pacdatanasc: this.pacdatanasc,
+        pacobs: this.pacobs
+      }
+      console.log(dadosPaciente)
     }
   }
 }
