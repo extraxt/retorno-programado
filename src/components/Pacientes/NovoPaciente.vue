@@ -1,10 +1,13 @@
 <template>
   <v-container>
-    <v-layout row wrap>
-      <v-flex class="text-xs-center" xs12 mb-2>
-          <h3>NOVO PACIENTE</h3>
-      </v-flex>
-    </v-layout>
+    <v-card>
+    <v-card-title>
+      <div>
+        <h3>Novo Paciente</h3>
+        <p>Preencha o máximo de informações possível.</p>
+      </div>
+    </v-card-title>
+    <v-card-text>
     <v-layout row>
       <v-flex xs12>
         <form @submit.prevent="onNovoPaciente">
@@ -150,6 +153,9 @@
         </form>
       </v-flex>
     </v-layout>
+    </v-card-text>
+    </v-card>
+    <br><br>
   </v-container>
 </template>
 
@@ -194,7 +200,7 @@ export default {
   },
   methods: {
     onNovoPaciente () {
-      if (!this.formEhValido) {
+      if (!this.formValido) {
         return
       }
       const dadosPaciente = {
