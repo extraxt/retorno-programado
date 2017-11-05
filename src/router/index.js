@@ -8,6 +8,7 @@ import Signin from '@/components/User/Signin'
 import Meetup from '@/components/Meetup/Meetup'
 import Pacientes from '@/components/Pacientes/Pacientes'
 import NovoPaciente from '@/components/Pacientes/NovoPaciente'
+import NovaClinica from '@/components/Clinicas/NovaClinica'
 import AuthGuard from './auth-guard'
 import RegistrarGuard from './registrar-guard'
 
@@ -60,6 +61,12 @@ export default new Router({
       path: '/novopaciente',
       name: 'Novo Paciente',
       component: NovoPaciente,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/novaclinica',
+      name: 'Nova Clínica',
+      component: NovaClinica,
       beforeEnter: AuthGuard
     }
   ],

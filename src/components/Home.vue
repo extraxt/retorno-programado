@@ -17,18 +17,23 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <v-layout row wrap v-else>
-      <v-flex xs12>
-        <v-card class="blue-grey darken-2 white--text">
+    <div v-else>
+      <v-layout>
+        <v-flex xs12>
+          <v-card class="blue-grey darken-2 white--text">
           <v-card-title primary-title>
-            <div class="headline">Você agora está Logado!</div>
+            <div class="headline">Adicione uma Clínica</div>
           </v-card-title>
           <v-card-text>
-            Utilize a barra superior ou o menu lateral esquerdo para começar a trabalhar!
+            <p>Para começar, você precisa criar sua primeira clínica:</p>
           </v-card-text>
+          <v-card-actions class="grey">
+            <v-btn flat dark block to="/novaclinica" class="mb-0">Criar primeira clínica</v-btn>
+          </v-card-actions>
         </v-card>
-      </v-flex>
-    </v-layout>
+        </v-flex>
+      </v-layout>
+    </div>
   </v-container>
 </template>
 
