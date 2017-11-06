@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container mt-0>
     <v-layout row wrap>
       <v-flex class="text-xs-center" xs12 mb-2>
           <h3>TODOS PACIENTES</h3>
@@ -7,18 +7,17 @@
       </v-flex>
       </v-layout>
       <v-layout>
-      <v-flex xs12 md6 offset-md3>
-        <v-card>
-          <v-list>
-            <v-list-tile avatar v-for="paciente in todosPacientes" :key="paciente.id">
-                <v-list-tile-content>
-                    <v-list-tile-title v-text="paciente.nome"></v-list-tile-title>
-                </v-list-tile-content>
-            </v-list-tile>
-        </v-list>
-        </v-card>
-      </v-flex>
-    </v-layout>
+        <v-flex xs12>
+          <v-expansion-panel popout>
+            <v-expansion-panel-content v-for="paciente in todosPacientes" :key="paciente.id">
+              <div slot="header">{{ paciente.nome }}</div>
+              <v-card>
+                <v-card-text class="grey lighten-3">...</v-card-text>
+              </v-card>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-flex>
+      </v-layout>
   </v-container>
 </template>
 

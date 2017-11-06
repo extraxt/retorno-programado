@@ -23,11 +23,11 @@
     </v-navigation-drawer>
     <v-toolbar dark class="primary">
       <span class="hidden-md-and-up">
-        <v-toolbar-side-icon
+        <v-toolbar-side-icon class="white blue--text"
         @click.stop="sideNav = !sideNav"></v-toolbar-side-icon>  
       </span>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer">Retorno App</router-link>
+        <router-link to="/" tag="span" style="cursor: pointer" id="nome-app">Retornando</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
@@ -79,7 +79,7 @@
         </v-list-tile>
       </v-list>
     </v-bottom-sheet>
-    <v-footer fixed>
+    <v-footer>
       <p>Desenvolvido por Rafael de Oliveira.</p>
     </v-footer>
   </v-app>
@@ -126,4 +126,9 @@
 
 <style lang="stylus">
   @import './stylus/main'
+
+  #nome-app {
+    font-family: 'Lobster', cursive;
+    font-size: 35px;
+  }
 </style>
