@@ -11,6 +11,7 @@ import NovoPaciente from '@/components/Pacientes/NovoPaciente'
 import NovaClinica from '@/components/Clinicas/NovaClinica'
 import AuthGuard from './auth-guard'
 import RegistrarGuard from './registrar-guard'
+import Procurar from '@/components/Procurar'
 
 Vue.use(Router)
 
@@ -68,6 +69,11 @@ export default new Router({
       name: 'Nova Clínica',
       component: NovaClinica,
       beforeEnter: AuthGuard
+    },
+    {
+      path: '/procurar',
+      name: 'Procurar',
+      component: Procurar
     }
   ],
   mode: 'history'

@@ -17,23 +17,21 @@
         </v-card>
       </v-flex>
     </v-layout>
-    <div v-else>
-      <v-layout>
-        <v-flex xs12>
-          <v-card class="blue-grey darken-2 white--text">
-          <v-card-title primary-title>
-            <div class="headline">Adicione uma Clínica</div>
-          </v-card-title>
-          <v-card-text>
-            <p>Para começar, você precisa criar sua primeira clínica:</p>
-          </v-card-text>
-          <v-card-actions class="grey">
-            <v-btn flat dark block to="/novaclinica" class="mb-0">Criar primeira clínica</v-btn>
-          </v-card-actions>
-        </v-card>
-        </v-flex>
-      </v-layout>
-    </div>
+    <v-layout v-else>
+      <v-flex xs12>
+        <v-card class="blue-grey darken-2 white--text">
+        <v-card-title primary-title>
+          <div class="headline">Adicione uma Clínica</div>
+        </v-card-title>
+        <v-card-text>
+          <p>Para começar, você precisa criar sua primeira clínica:</p>
+        </v-card-text>
+        <v-card-actions class="grey">
+          <v-btn flat dark block to="/novaclinica" class="mb-0">Criar primeira clínica</v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
@@ -42,6 +40,9 @@
     computed: {
       usuarioEstaAutenticado () {
         return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+      },
+      todosPacientes () {
+        return this.$store.getters.todosPacientes
       }
     }
   }

@@ -1,28 +1,58 @@
 <template>
   <v-container mt-0>
-    <v-layout row wrap>
-      <v-flex class="text-xs-center" xs12 mb-2>
-          <h3>TODOS PACIENTES</h3>
-          <v-btn to="/novopaciente">Adicionar Novo Paciente</v-btn>
+    <v-layout column wrap>
+      <v-flex>
+        <v-card>
+          <v-toolbar class="grey darken-3">
+            <v-toolbar-title class="white--text letra-diferente">pacientes</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn small fab to="/novopaciente" class="green lighten-1 white--text">
+              <v-icon>add</v-icon>
+            </v-btn>
+          </v-toolbar>
+        </v-card>
       </v-flex>
-      </v-layout>
-      <v-layout>
-        <v-flex xs12>
-          <v-expansion-panel popout>
-            <v-expansion-panel-content v-for="paciente in todosPacientes" :key="paciente.id">
-              <div slot="header">{{ paciente.nome }}</div>
-              <v-card>
-                <v-card-text class="grey lighten-3">...</v-card-text>
-              </v-card>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-flex>
-      </v-layout>
+      <v-flex>
+        <v-card>
+          <v-toolbar dense flat>
+            <v-spacer></v-spacer>
+            <v-toolbar-title>
+            <v-text-field
+              append-icon="search"
+              label="Procurar..."
+              single-line
+              hide-details
+              v-model="search"
+            ></v-text-field></v-toolbar-title>
+          </v-toolbar>
+          <v-data-table
+              hide-headers
+              hide-actions
+              v-bind:items="todosPacientes"
+              v-bind:search="search"
+            >
+            <template slot="items" slot-scope="props">
+              <td>
+                {{ props.item.nome }}
+              </td>
+            </template>
+            <template slot="pageText" slot-scope="{ pageStart, pageStop }">
+              From {{ pageStart }} to {{ pageStop }}
+            </template>
+          </v-data-table>
+        </v-card>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 
 <script>
   export default {
+    data () {
+      return {
+        search: ''
+      }
+    },
     computed: {
       todosPacientes () {
         return this.$store.getters.todosPacientes

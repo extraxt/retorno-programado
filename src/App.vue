@@ -21,13 +21,13 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar dark class="primary">
+    <v-toolbar dense dark class="primary">
       <span class="hidden-md-and-up">
         <v-toolbar-side-icon class="white blue--text"
         @click.stop="sideNav = !sideNav"></v-toolbar-side-icon>  
       </span>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer" id="nome-app">Retornando</router-link>
+        <router-link to="/" tag="span" style="cursor: pointer" id="nome-app">Retorna App</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
@@ -130,5 +130,9 @@
   #nome-app {
     font-family: 'Lobster', cursive;
     font-size: 35px;
+  }
+
+  .letra-diferente {
+    font-family: 'Lobster', cursive;
   }
 </style>

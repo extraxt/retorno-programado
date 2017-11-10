@@ -7,6 +7,7 @@ export default {
   mutations: {
     todosPacientes (state, payload) {
       state.todosPacientes = payload
+      console.log(payload)
     }
   },
   actions: {
