@@ -18,7 +18,8 @@
                 v-model="pacnome"
                 label="Nome do Paciente"
                 id="nome"
-                required></v-text-field>
+                required
+                ></v-text-field>
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -108,9 +109,9 @@
               <br>
               <p>Escolha o sexo:</p>
               <v-radio-group v-model="pacsexo" required>
-                <v-radio label="Masculino" value="Masculino"></v-radio>
+                <v-radio label="Masculino" value="masculino"></v-radio>
                 <br>
-                <v-radio label="Feminino" value="Feminino"></v-radio>
+                <v-radio label="Feminino" value="feminino"></v-radio>
             </v-radio-group>
             <br>
             </v-flex>
@@ -174,7 +175,7 @@ export default {
       estados: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
       telefone: '(99)999999999',
       datanasc: '99/99/9999',
-      pacsexo: 'Masculino',
+      pacsexo: 'masculino',
       pacnome: '',
       paccodigo: '',
       pactelefone1: '',

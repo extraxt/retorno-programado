@@ -33,7 +33,7 @@
             >
             <template slot="items" slot-scope="props">
               <td>
-                {{ props.item.nome }}
+                <router-link :to="'/paciente/'+props.item.id" tag="span" style="cursor: pointer">{{ props.item.nome }}</router-link>
               </td>
             </template>
             <template slot="pageText" slot-scope="{ pageStart, pageStop }">
