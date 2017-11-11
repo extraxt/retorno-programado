@@ -7,7 +7,6 @@ export default {
   mutations: {
     todosPacientes (state, payload) {
       state.todosPacientes = payload
-      console.log(payload)
     }
   },
   actions: {
@@ -31,8 +30,6 @@ export default {
       }
       firebase.database().ref(usuarioId + '/pacientes').push(dadosPaciente)
       .then(data => {
-        console.log('Deu certo o registro!')
-        console.log(data)
         commit('setLoading', false)
       })
       .catch(error => {
@@ -119,7 +116,6 @@ export default {
       firebase.database().ref(usuarioId + '/pacientes').child(payload.id).update(updateObj)
       .then(() => {
         commit('setLoading', false)
-        console.log('Deu certo o update dos dados!')
       })
       .catch(error => {
         console.log(error)
@@ -129,7 +125,9 @@ export default {
   },
   getters: {
     todosPacientes (state) {
-      return state.todosPacientes
+      return state.todosPacientes.sort((pacienteA, pacienteB) => {
+        return pacienteA.nome > pacienteB.nome
+      })
     },
     unicoPaciente (state) {
       return (pacienteId) => {
@@ -137,6 +135,19 @@ export default {
           return paciente.id === pacienteId
         })
       }
+    },
+    filtradoPacientes (state) {
+      const obj = state.todosPacientes.sort((pacienteA, pacienteB) => {
+        return pacienteA.nome > pacienteB.nome
+      })
+      const array = []
+      for (let key in obj) {
+        array.push({
+          text: obj[key].nome + ' ( ' + obj[key].codigo + ' )',
+          value: obj[key].id
+        })
+      }
+      return array
     }
   }
 }

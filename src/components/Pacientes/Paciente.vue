@@ -4,9 +4,9 @@
     <v-card-title>
       <div>
         <h3>Ficha do Paciente</h3>
-        <p>Se algum campo estiver desatualizado, atualize!</p>
       </div>
     </v-card-title>
+    <v-divider></v-divider>
     <v-card-text v-if="!editar">
     <v-layout row>
       <v-flex xs12>

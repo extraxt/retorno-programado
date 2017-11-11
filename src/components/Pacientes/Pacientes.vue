@@ -3,8 +3,8 @@
     <v-layout column wrap>
       <v-flex>
         <v-card>
-          <v-toolbar class="grey darken-3">
-            <v-toolbar-title class="white--text letra-diferente">pacientes</v-toolbar-title>
+          <v-toolbar dense class="grey darken-3">
+            <v-toolbar-title class="white--text">pacientes</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn small fab to="/novopaciente" class="green lighten-1 white--text">
               <v-icon>add</v-icon>
@@ -15,15 +15,13 @@
       <v-flex>
         <v-card>
           <v-toolbar dense flat>
-            <v-spacer></v-spacer>
-            <v-toolbar-title>
-            <v-text-field
+            <v-text-field class="text-xs-center"
               append-icon="search"
               label="Procurar..."
               single-line
               hide-details
               v-model="search"
-            ></v-text-field></v-toolbar-title>
+            ></v-text-field>
           </v-toolbar>
           <v-data-table
               hide-headers

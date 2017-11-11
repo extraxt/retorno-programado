@@ -21,13 +21,13 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar dense dark class="primary">
+    <v-toolbar flat dense dark class="primary">
       <span class="hidden-md-and-up">
         <v-toolbar-side-icon class="white blue--text"
         @click.stop="sideNav = !sideNav"></v-toolbar-side-icon>  
       </span>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor: pointer" id="nome-app">Retorna App</router-link>
+        <router-link to="/" tag="span" style="cursor: pointer">dental<b>back</b></router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
@@ -59,7 +59,7 @@
         bottom
         right
         fixed
-        color="pink"
+        color="grey"
         slot="activator">
         <v-icon>grade</v-icon>
       </v-btn>
@@ -79,9 +79,6 @@
         </v-list-tile>
       </v-list>
     </v-bottom-sheet>
-    <v-footer>
-      <p>Desenvolvido por Rafael de Oliveira.</p>
-    </v-footer>
   </v-app>
 </template>
 
@@ -106,7 +103,7 @@
         if (this.usuarioEstaAutenticado) {
           menuItems = [
             {icone: 'line_weight', titulo: 'Todos os Retornos', link: '/meetups'},
-            {icone: 'note_add', titulo: 'Novo Retorno', link: '/meetup/new'},
+            {icone: 'note_add', titulo: 'Novo Retorno', link: '/novoretorno'},
             {icone: 'account_box', titulo: 'Pacientes', link: '/pacientes'}
           ]
         }
@@ -126,13 +123,4 @@
 
 <style lang="stylus">
   @import './stylus/main'
-
-  #nome-app {
-    font-family: 'Lobster', cursive;
-    font-size: 35px;
-  }
-
-  .letra-diferente {
-    font-family: 'Lobster', cursive;
-  }
 </style>

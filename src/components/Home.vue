@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row wrap v-if="!usuarioEstaAutenticado">
       <v-flex xs12>
-        <v-card class="blue-grey darken-2 white--text">
+        <v-card flat class="blue-grey darken-2 white--text">
           <v-card-title primary-title>
             <div class="headline">Seja Bem-vindo!</div>
           </v-card-title>
@@ -19,7 +19,7 @@
     </v-layout>
     <v-layout v-else>
       <v-flex xs12>
-        <v-card class="blue-grey darken-2 white--text">
+        <v-card flat class="blue-grey darken-2 white--text">
         <v-card-title primary-title>
           <div class="headline">Adicione uma Clínica</div>
         </v-card-title>
