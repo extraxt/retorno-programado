@@ -18,6 +18,7 @@
               v-model="retornotit"
               label="Título do retorno"
               hint="Título do retorno"
+              required
             ></v-text-field>
             </v-flex>
           </v-layout>
@@ -93,6 +94,20 @@
           <v-layout row justify-center>
             <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
               <v-select
+                prepend-icon="home"
+                v-bind:items="clinicas"
+                v-model="retornocli"
+                label="Clínica"
+                single-line
+                no-data-text="Nenhuma clínica selecionada"
+                clearable
+                required
+              ></v-select>
+            </v-flex>
+          </v-layout>
+          <v-layout row justify-center>
+            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+              <v-select
                 prepend-icon="assignment_ind"
                 v-bind:items="dentistas"
                 v-model="retornodent"
@@ -144,6 +159,7 @@
 export default {
   data () {
     return {
+      clinicas: [],
       dentistas: ['Dr. Rafael'],
       opcoestempo: [
         {titulo: '7 Dias', dias: 7},
@@ -177,6 +193,7 @@ export default {
       retornocat: '',
       retornorisco: '',
       retornodent: '',
+      retornocli: '',
       retornoobs: '',
       dialog: false
     }
@@ -198,7 +215,8 @@ export default {
       this.retornopac !== '' &&
       this.retornotempo !== '' &&
       this.retornocat !== '' &&
-      this.retornodent !== ''
+      this.retornodent !== '' &&
+      this.retornocli !== ''
     },
     loading () {
       return this.$store.getters.loading
@@ -216,11 +234,12 @@ export default {
         especialidade: this.retornocat,
         risco: this.retornorisco,
         dentista: this.retornodent,
+        clinica: this.retornocli,
         obs: this.retornoobs,
         criacao: this.retornocria
       }
       this.$store.dispatch('criarRetorno', dadosRetorno)
-      this.$router.push('/novoretorno')
+      this.$router.push('/')
     }
   }
 }

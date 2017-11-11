@@ -13,7 +13,6 @@ import NovaClinica from '@/components/Clinicas/NovaClinica'
 import NovoRetorno from '@/components/Retornos/NovoRetorno'
 import AuthGuard from './auth-guard'
 import RegistrarGuard from './registrar-guard'
-import Procurar from '@/components/Procurar'
 
 Vue.use(Router)
 
@@ -84,11 +83,6 @@ export default new Router({
       name: 'Novo Retorno',
       component: NovoRetorno,
       beforeEnter: AuthGuard
-    },
-    {
-      path: '/procurar',
-      name: 'Procurar',
-      component: Procurar
     }
   ],
   mode: 'history'

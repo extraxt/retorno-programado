@@ -14,11 +14,13 @@ export default {
       commit('setLoading', true)
       const usuarioId = getters.user.id
       const dadosRetorno = {
+        titulo: payload.titulo,
         pacid: payload.pacid,
         tempo: payload.tempo,
         especialidade: payload.especialidade,
         risco: payload.risco,
         dentista: payload.dentista,
+        clinica: payload.clinica,
         obs: payload.obs,
         criacao: payload.criacao
       }
@@ -81,6 +83,9 @@ export default {
       }
       if (payload.dentista) {
         updateObj.dentista = payload.dentista
+      }
+      if (payload.clinica) {
+        updateObj.clinica = payload.clinica
       }
       if (payload.obs) {
         updateObj.obs = payload.obs
