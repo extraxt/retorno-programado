@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card>
+    <v-card class="elevation-1">
     <v-card-title>
       <div>
         <h3>Ficha do Paciente</h3>

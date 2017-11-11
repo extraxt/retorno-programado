@@ -2,18 +2,16 @@
   <v-container mt-0>
     <v-layout column wrap>
       <v-flex>
-        <v-card>
-          <v-toolbar dense class="grey darken-3">
-            <v-toolbar-title class="white--text">pacientes</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-btn small fab to="/novopaciente" class="green lighten-1 white--text">
-              <v-icon>add</v-icon>
-            </v-btn>
-          </v-toolbar>
-        </v-card>
+        <v-toolbar class="blue lighten-1 elevation-1">
+          <v-toolbar-title class="white--text"><h4 class="mb-0">todos<b>pacientes</b></h4></v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn small fab to="/novopaciente" class="green lighten-1 white--text">
+            <v-icon>add</v-icon>
+          </v-btn>
+        </v-toolbar>
       </v-flex>
       <v-flex>
-        <v-card>
+        <v-card class="elevation-1">
           <v-toolbar dense flat>
             <v-text-field class="text-xs-center"
               append-icon="search"

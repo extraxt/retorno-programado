@@ -1,9 +1,9 @@
 <template>
   <v-container>
-    <v-card>
+    <v-card class="elevation-1">
     <v-card-title>
       <div>
-        <h3>novo<b>paciente</b></h3>
+        <h3 class="blue--text">novo<b>paciente</b></h3>
         <p>Preencha o máximo de informações possível.</p>
       </div>
     </v-card-title>

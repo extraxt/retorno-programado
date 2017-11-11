@@ -51,7 +51,7 @@
     <main>
       <router-view></router-view>
     </main>
-    <v-bottom-sheet v-model="sheet" v-if="usuarioEstaAutenticado" inset>
+    <!-- <v-bottom-sheet v-model="sheet" v-if="usuarioEstaAutenticado" inset>
       <v-btn style="bottom: 60px"
         absolute
         dark
@@ -78,7 +78,7 @@
           <v-list-tile-title>{{ tile.title }}</v-list-tile-title>
         </v-list-tile>
       </v-list>
-    </v-bottom-sheet>
+    </v-bottom-sheet> -->
   </v-app>
 </template>
 
@@ -102,7 +102,7 @@
         ]
         if (this.usuarioEstaAutenticado) {
           menuItems = [
-            {icone: 'line_weight', titulo: 'Todos os Retornos', link: '/meetups'},
+            {icone: 'line_weight', titulo: 'Todos os Retornos', link: '/retornos'},
             {icone: 'note_add', titulo: 'Novo Retorno', link: '/novoretorno'},
             {icone: 'account_box', titulo: 'Pacientes', link: '/pacientes'}
           ]

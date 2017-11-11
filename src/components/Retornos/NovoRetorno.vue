@@ -1,9 +1,9 @@
 <template>
   <v-container>
-    <v-card>
+    <v-card class="elevation-1">
     <v-card-title>
       <div>
-        <h3>novo<b>retorno</b></h3>
+        <h3 class="blue--text">novo<b>retorno</b></h3>
         <p>Crie um retorno para tirar os pontos, ou controle cirúrgico.</p>
       </div>
     </v-card-title>
@@ -18,6 +18,8 @@
               v-model="retornotit"
               label="Título do retorno"
               hint="Título do retorno"
+              :rules="[(v) => v.length <= 50 || 'Máximo de 50 caracteres para o título']"
+              :counter="50"
               required
             ></v-text-field>
             </v-flex>
