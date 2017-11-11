@@ -3,14 +3,24 @@
     <v-card>
     <v-card-title>
       <div>
-        <h3>Novo Retorno</h3>
+        <h3>novo<b>retorno</b></h3>
         <p>Crie um retorno para tirar os pontos, ou controle cirúrgico.</p>
       </div>
     </v-card-title>
     <v-card-text>
     <v-layout row>
       <v-flex xs12>
-        <form @submit.prevent>
+        <form @submit.prevent="onNovoRetorno">
+          <v-layout row>
+            <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
+              <v-text-field
+              prepend-icon="comment"
+              v-model="retornotit"
+              label="Título do retorno"
+              hint="Título do retorno"
+            ></v-text-field>
+            </v-flex>
+          </v-layout>
           <v-layout row>
             <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
               <v-select
@@ -24,28 +34,12 @@
                 clearable>
                 <template slot="no-data">
                   <v-layout row justify-center>
-                    <v-btn small @click.stop="dialog = true" class="green lighten-1 white--text">
+                    <v-btn small to="/novopaciente" class="green lighten-1 white--text">
                       <v-icon>add</v-icon> Adicione novo Paciente
                     </v-btn>
                   </v-layout>
                 </template>
               </v-select>
-              <v-dialog v-model="dialog" max-width="600px">
-                <v-card>
-                  <v-card-text>
-                    <v-layout row justify-center>
-                      <v-flex>
-                        <novo-paciente></novo-paciente>
-                      </v-flex>
-                    </v-layout>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">Disagree</v-btn>
-                    <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">Agree</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
@@ -59,7 +53,14 @@
                 label="Retorno"
                 single-line
                 no-data-text="Nenhum período selecionado"
+                clearable
+                required
               ></v-select>
+            </v-flex>
+          </v-layout>
+          <v-layout row justify-center>
+            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+              <p v-if="retornotempo">Previsão do Retorno: {{ retornovolta }}</p>
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
@@ -71,6 +72,8 @@
                 label="Especialidade"
                 single-line
                 no-data-text="Nenhum período selecionado"
+                clearable
+                required
               ></v-select>
             </v-flex>
           </v-layout>
@@ -83,6 +86,7 @@
                 label="Risco"
                 single-line
                 no-data-text="Nenhum risco selecionado"
+                clearable
               ></v-select>
             </v-flex>
           </v-layout>
@@ -95,6 +99,8 @@
                 label="Dentista"
                 single-line
                 no-data-text="Nenhum dentista selecionado"
+                clearable
+                required
               ></v-select>
             </v-flex>
           </v-layout>
@@ -105,7 +111,7 @@
                 name="observacoes"
                 label="Observações Gerais"
                 id="observacoes"
-                v-model="pacobs"
+                v-model="retornoobs"
                 placeholder="Alguma informação a mais?"
                 multi-line
               ></v-text-field>
@@ -135,12 +141,10 @@
 </template>
 
 <script>
-import AwesomeMask from 'awesome-mask'
-
 export default {
   data () {
     return {
-      dentistas: [],
+      dentistas: ['Dr. Rafael'],
       opcoestempo: [
         {titulo: '7 Dias', dias: 7},
         {titulo: '14 Dias', dias: 14},
@@ -153,6 +157,7 @@ export default {
       categorias: [
         'Acupuntura',
         'Cirurgia',
+        'Clínica Geral',
         'DTM',
         'Dentística',
         'Endodontia',
@@ -166,78 +171,56 @@ export default {
         'Radiologia'
       ],
       riscos: [],
+      retornotit: '',
       retornopac: '',
       retornotempo: '',
       retornocat: '',
       retornorisco: '',
       retornodent: '',
-      dialog: false,
-      teletipos: ['WhatsApp', 'Celular', 'Casa', 'Trabalho'],
-      estados: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
-      telefone: '(99)999999999',
-      datanasc: '99/99/9999',
-      pacsexo: 'masculino',
-      pacnome: '',
-      paccodigo: '',
-      pactelefone1: '',
-      pacteletipo1: '',
-      pactelefone2: '',
-      pacteletipo2: '',
-      pacemail: '',
-      pacendereco: '',
-      paccidade: '',
-      pacestado: '',
-      pacdatanasc: '',
-      pacobs: ''
+      retornoobs: '',
+      dialog: false
     }
   },
   computed: {
-    todosPacientes () {
-      return this.$store.getters.todosPacientes
+    retornovolta () {
+      const dataoriginal = new Date()
+      dataoriginal.setDate(dataoriginal.getDate() + this.retornotempo)
+      const dia = dataoriginal.getDate()
+      const mes = dataoriginal.getMonth() + 1
+      const ano = dataoriginal.getFullYear()
+      return dia + '/' + mes + '/' + ano
     },
     filtradoPacientes () {
       return this.$store.getters.filtradoPacientes
     },
     formValido () {
-      return this.pacnome !== '' &&
-      this.paccodigo !== '' &&
-      this.pactelefone1 !== '' &&
-      this.pacteletipo1 !== '' &&
-      this.paccidade !== '' &&
-      this.pacestado !== '' &&
-      this.pacdatanasc !== ''
+      return this.retornotit !== '' &&
+      this.retornopac !== '' &&
+      this.retornotempo !== '' &&
+      this.retornocat !== '' &&
+      this.retornodent !== ''
     },
     loading () {
       return this.$store.getters.loading
     }
   },
-  directives: {
-    mask: AwesomeMask
-  },
   methods: {
-    onNovoPaciente () {
+    onNovoRetorno () {
       if (!this.formValido) {
         return
       }
-      const dadosPaciente = {
-        pacsexo: this.pacsexo,
-        pacnome: this.pacnome,
-        paccodigo: this.paccodigo,
-        pactelefone1: this.pactelefone1,
-        pacteletipo1: this.pacteletipo1,
-        pactelefone2: this.pactelefone2,
-        pacteletipo2: this.pacteletipo2,
-        pacemail: this.pacemail,
-        pacendereco: this.pacendereco,
-        paccidade: this.paccidade,
-        pacestado: this.pacestado,
-        pacdatanasc: this.pacdatanasc,
-        pacobs: this.pacobs
+      const dadosRetorno = {
+        tit: this.retornotit,
+        pacid: this.retornopac,
+        tempo: this.retornotempo,
+        especialidade: this.retornocat,
+        risco: this.retornorisco,
+        dentista: this.retornodent,
+        obs: this.retornoobs,
+        criacao: this.retornocria
       }
-      console.log(dadosPaciente)
-      this.$store.dispatch('criarPaciente', dadosPaciente)
-      this.$router.push('/pacientes')
-      this.$store.dispatch('todosPacientes')
+      this.$store.dispatch('criarRetorno', dadosRetorno)
+      this.$router.push('/novoretorno')
     }
   }
 }
