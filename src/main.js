@@ -6,14 +6,14 @@ import router from './router'
 import { store } from './store'
 import DateFilter from './filters/date'
 import AlertCmp from './components/Shared/Alert'
-import Procurar from './components/Procurar'
+import NovoPaciente from './components/Pacientes/NovoPaciente'
 
 Vue.use(Vuetify)
 Vue.config.productionTip = false
 
 Vue.filter('date', DateFilter)
 Vue.component('app-alert', AlertCmp)
-Vue.component('procurar', Procurar)
+Vue.component('novo-paciente', NovoPaciente)
 
 /* eslint-disable no-new */
 new Vue({

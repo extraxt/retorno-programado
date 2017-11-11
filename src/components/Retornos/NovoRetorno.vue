@@ -4,7 +4,7 @@
     <v-card-title>
       <div>
         <h3>Novo Retorno</h3>
-        <p>Preencha o máximo de informações possível.</p>
+        <p>Crie um retorno para tirar os pontos, ou controle cirúrgico.</p>
       </div>
     </v-card-title>
     <v-card-text>
@@ -30,10 +30,15 @@
                   </v-layout>
                 </template>
               </v-select>
-              <v-dialog v-model="dialog" persistent>
+              <v-dialog v-model="dialog" max-width="600px">
                 <v-card>
-                  <v-card-title class="headline">Use Google's location service?</v-card-title>
-                  <v-card-text>Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.</v-card-text>
+                  <v-card-text>
+                    <v-layout row justify-center>
+                      <v-flex>
+                        <novo-paciente></novo-paciente>
+                      </v-flex>
+                    </v-layout>
+                  </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">Disagree</v-btn>
@@ -41,120 +46,62 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
-              {{ retornopac }}
             </v-flex>
           </v-layout>
-          <v-layout row>
-            <v-flex xs6 sm4 offset-sm1 md3 offset-md2 lg2 offset-lg2>
-              <v-text-field
-                name="codigo"
-                v-model="paccodigo"
-                label="Cód. do Paciente"
-                id="codigo"
-                required
-                ></v-text-field>
+          <v-layout row justify-center>
+            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+              <v-select
+                prepend-icon="restore"
+                v-bind:items="opcoestempo"
+                item-text="titulo"
+                item-value="dias"
+                v-model="retornotempo"
+                label="Retorno"
+                single-line
+                no-data-text="Nenhum período selecionado"
+              ></v-select>
             </v-flex>
           </v-layout>
-          <v-layout row>
-            <v-flex xs8 sm6 offset-sm1 md4 offset-md2>
-              <v-text-field
-                name="telefone1"
-                v-model="pactelefone1"
-                label="Telefone 1"
-                id="telefone1"
-                prepend-icon="phone"
-                v-mask="telefone"
-                required></v-text-field>
-            </v-flex>
-            <v-flex xs4 sm4>
-              <v-select v-bind:items="teletipos" v-model="pacteletipo1" label="Tipo:" required>
-              </v-select>
+          <v-layout row justify-center>
+            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+              <v-select
+                prepend-icon="bookmark"
+                v-bind:items="categorias"
+                v-model="retornocat"
+                label="Especialidade"
+                single-line
+                no-data-text="Nenhum período selecionado"
+              ></v-select>
             </v-flex>
           </v-layout>
-          <v-layout row>
-            <v-flex xs8 sm6 offset-sm1 md4 offset-md2>
-              <v-text-field
-                name="telefone2"
-                v-model="pactelefone2"
-                label="Telefone 2"
-                id="telefone2"
-                prepend-icon="phone"
-                v-mask="telefone"
-                ></v-text-field>
-            </v-flex>
-            <v-flex xs4 sm4>
-              <v-select v-bind:items="teletipos" v-model="pacteletipo2" label="Tipo:">
-              </v-select>
+          <v-layout row justify-center>
+            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+              <v-select
+                prepend-icon="bookmark"
+                v-bind:items="riscos"
+                v-model="retornorisco"
+                label="Risco"
+                single-line
+                no-data-text="Nenhum risco selecionado"
+              ></v-select>
             </v-flex>
           </v-layout>
-          <v-layout row>
-            <v-flex xs12 sm8 offset-sm1 md6 offset-md2 lg4 offset-lg2>
-              <v-text-field
-                name="email"
-                label="E-Mail do Paciente"
-                id="email"
-                type="email"
-                v-model="pacemail"
-                placeholder="meu-email@gmail.com"
-                hint="Ex.: meu-email@gmail.com"
-                ></v-text-field>
+          <v-layout row justify-center>
+            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+              <v-select
+                prepend-icon="assignment_ind"
+                v-bind:items="dentistas"
+                v-model="retornodent"
+                label="Dentista"
+                single-line
+                no-data-text="Nenhum dentista selecionado"
+              ></v-select>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
               <v-text-field
-                name="endereco"
-                label="Endereço do Paciente"
-                id="endereco"
-                v-model="pacendereco"
-                hint="Ex.: Rua das Flores, 123 - Centro"
-              ></v-text-field>
-            </v-flex>
-          </v-layout>
-          <v-layout row>
-            <v-flex xs8 sm6 offset-sm1 md4 offset-md2>
-              <v-text-field
-                name="cidade"
-                label="Cidade"
-                id="cidade"
-                v-model="paccidade"
-                hint="Ex.: Lapa"
-                required
-              ></v-text-field>
-            </v-flex>
-            <v-flex xs4 sm4>
-              <v-select v-model="pacestado" v-bind:items="estados" label="Estado" required></v-select>
-            </v-flex>
-          </v-layout>
-          <v-layout row>
-            <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
-              <br>
-              <p>Escolha o sexo:</p>
-              <v-radio-group v-model="pacsexo" required>
-                <v-radio label="Masculino" value="masculino"></v-radio>
-                <br>
-                <v-radio label="Feminino" value="feminino"></v-radio>
-            </v-radio-group>
-            <br>
-            </v-flex>
-          </v-layout>
-          <v-layout row>
-            <v-flex xs6 sm4 offset-sm1 md2 offset-md2>
-              <v-text-field
-                name="datanasc"
-                label="Nascimento"
-                placeholder="Ex: 30/12/1970"
-                hint="Ex: 30/12/1970"
-                v-mask= "datanasc"
-                v-model="pacdatanasc"
-                id="datanasc"
-                required
-              ></v-text-field>
-            </v-flex>
-          </v-layout>
-          <v-layout row>
-            <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
-              <v-text-field
+                prepend-icon="reorder"
                 name="observacoes"
                 label="Observações Gerais"
                 id="observacoes"
@@ -170,7 +117,7 @@
                 class="primary"
                 type="submit"
                 :loading="loading"
-                :disabled="!formValido">Cadastrar Paciente
+                :disabled="!formValido">Cadastrar Retorno
                 <span slot="loader" class="custom-loader">
                   <v-icon light>cached</v-icon>
                 </span>
@@ -193,7 +140,37 @@ import AwesomeMask from 'awesome-mask'
 export default {
   data () {
     return {
+      dentistas: [],
+      opcoestempo: [
+        {titulo: '7 Dias', dias: 7},
+        {titulo: '14 Dias', dias: 14},
+        {titulo: '21 Dias', dias: 21},
+        {titulo: '1 Mês', dias: 30},
+        {titulo: '3 Meses', dias: 90},
+        {titulo: '6 Meses', dias: 180},
+        {titulo: '1 Ano', dias: 365}
+      ],
+      categorias: [
+        'Acupuntura',
+        'Cirurgia',
+        'DTM',
+        'Dentística',
+        'Endodontia',
+        'Implantodontia',
+        'Laserterapia',
+        'Odontopediatria',
+        'Ortodontia',
+        'Patologia',
+        'Periodontia',
+        'Prótese',
+        'Radiologia'
+      ],
+      riscos: [],
       retornopac: '',
+      retornotempo: '',
+      retornocat: '',
+      retornorisco: '',
+      retornodent: '',
       dialog: false,
       teletipos: ['WhatsApp', 'Celular', 'Casa', 'Trabalho'],
       estados: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
