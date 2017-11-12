@@ -51,34 +51,6 @@
     <main>
       <router-view></router-view>
     </main>
-    <!-- <v-bottom-sheet v-model="sheet" v-if="usuarioEstaAutenticado" inset>
-      <v-btn style="bottom: 60px"
-        absolute
-        dark
-        fab
-        bottom
-        right
-        fixed
-        color="grey"
-        slot="activator">
-        <v-icon>grade</v-icon>
-      </v-btn>
-      <v-list>
-        <v-subheader>Ações Rápidas</v-subheader>
-        <v-list-tile
-          v-for="tile in tiles"
-          :key="tile.title"
-          @click="sheet = false"
-        >
-          <v-list-tile-avatar>
-            <v-avatar size="32px" tile>
-              <v-icon :color="tile.cor">{{ tile.icon }}</v-icon>
-            </v-avatar>
-          </v-list-tile-avatar>
-          <v-list-tile-title>{{ tile.title }}</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-bottom-sheet> -->
   </v-app>
 </template>
 

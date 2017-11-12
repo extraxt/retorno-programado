@@ -36,6 +36,7 @@ new Vue({
         this.$store.dispatch('autoSignIn', user)
         this.$store.dispatch('todosPacientes')
         this.$store.dispatch('todasClinicas')
+        this.$store.dispatch('todosRetornos')
       }
     })
   }

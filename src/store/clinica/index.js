@@ -76,6 +76,13 @@ export default {
         return clinicaA.nome > clinicaB.nome
       })
     },
+    unicaClinica (state) {
+      return (clinicaId) => {
+        return state.todasClinicas.find((clinica) => {
+          return clinica.id === clinicaId
+        })
+      }
+    },
     filtradoClinicas (state) {
       const obj = state.todasClinicas.sort((clinicaA, clinicaB) => {
         return clinicaA.nome > clinicaB.nome

@@ -24,7 +24,7 @@ export default {
         especialidade: payload.especialidade,
         risco: payload.risco,
         dentista: payload.dentista,
-        clinica: payload.clinica,
+        clinicaid: payload.clinicaid,
         obs: payload.obs
       }
       firebase.database().ref(usuarioId + '/retornos').push(dadosRetorno)
@@ -57,7 +57,7 @@ export default {
             especialidade: obj[key].especialidade,
             risco: obj[key].risco,
             dentista: obj[key].dentista,
-            clinica: obj[key].clinica,
+            clinicaid: obj[key].clinicaid,
             obs: obj[key].obs
           })
         }
@@ -79,6 +79,12 @@ export default {
       if (payload.pacid) {
         updateObj.pacid = payload.pacid
       }
+      if (payload.datacadastro) {
+        updateObj.datacadastro = payload.datacadastro
+      }
+      if (payload.datavalidade) {
+        updateObj.datavalidade = payload.datavalidade
+      }
       if (payload.tempo) {
         updateObj.tempo = payload.tempo
       }
@@ -91,14 +97,11 @@ export default {
       if (payload.dentista) {
         updateObj.dentista = payload.dentista
       }
-      if (payload.clinica) {
-        updateObj.clinica = payload.clinica
+      if (payload.clinicaid) {
+        updateObj.clinicaid = payload.clinicaid
       }
       if (payload.obs) {
         updateObj.obs = payload.obs
-      }
-      if (payload.criacao) {
-        updateObj.criacao = payload.criacao
       }
       firebase.database().ref(usuarioId + '/retornos').child(payload.id).update(updateObj)
       .then(() => {
@@ -114,7 +117,7 @@ export default {
   getters: {
     todosRetornos (state) {
       return state.todosRetornos.sort((retornoA, retornoB) => {
-        return retornoA.nome > retornoB.nome
+        return retornoA.datavalidade > retornoB.datavalidade
       })
     },
     unicoRetorno (state) {
@@ -123,10 +126,10 @@ export default {
           return retorno.id === retornoId
         })
       }
-    },
-    filtradoRetornos (state) {
+    }
+    /* filtradoRetornos (state) {
       const obj = state.todosRetornos.sort((retornoA, retornoB) => {
-        return retornoA.nome > retornoB.nome
+        return retornoA.datavalidade > retornoB.datavalidade
       })
       const array = []
       for (let key in obj) {
@@ -136,6 +139,6 @@ export default {
         })
       }
       return array
-    }
+     } */
   }
 }

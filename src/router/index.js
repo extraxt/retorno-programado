@@ -13,8 +13,8 @@ import NovaClinica from '@/components/Clinicas/NovaClinica'
 import Clinicas from '@/components/Clinicas/Clinicas'
 import NovoRetorno from '@/components/Retornos/NovoRetorno'
 import Retornos from '@/components/Retornos/Retornos'
+import Retorno from '@/components/Retornos/Retorno'
 import AuthGuard from './auth-guard'
-import RegistrarGuard from './registrar-guard'
 
 Vue.use(Router)
 
@@ -47,8 +47,7 @@ export default new Router({
     {
       path: '/registrar',
       name: 'Registrar',
-      component: Signup,
-      beforeEnter: RegistrarGuard
+      component: Signup
     },
     {
       path: '/entrar',
@@ -96,6 +95,13 @@ export default new Router({
       path: '/retornos',
       name: 'Retornos',
       component: Retornos,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/retorno/:id',
+      name: 'Retorno',
+      props: true,
+      component: Retorno,
       beforeEnter: AuthGuard
     }
   ],

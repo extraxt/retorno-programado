@@ -184,7 +184,8 @@ export default {
       }
       console.log(dadosClinica)
       this.$store.dispatch('criarClinica', dadosClinica)
-      this.$router.push('/')
+      this.$store.dispatch('todasClinicas', dadosClinica)
+      this.$router.push('/clinicas')
     }
   }
 }

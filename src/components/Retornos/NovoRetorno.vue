@@ -98,7 +98,7 @@
             <v-flex xs12 sm12 md6 offset-md1 lg4>
               <v-select
                 v-bind:items="filtradoClinicas"
-                v-model="retornocli"
+                v-model="retornocliid"
                 label="Clínica"
                 autocomplete
                 required
@@ -202,7 +202,7 @@ export default {
       retornocat: '',
       retornorisco: '',
       retornodent: '',
-      retornocli: '',
+      retornocliid: '',
       retornoobs: '',
       dialog: false
     }
@@ -235,7 +235,7 @@ export default {
       this.retornotempo !== '' &&
       this.retornocat !== '' &&
       this.retornodent !== '' &&
-      this.retornocli !== ''
+      this.retornocliid !== ''
     },
     loading () {
       return this.$store.getters.loading
@@ -255,7 +255,7 @@ export default {
         especialidade: this.retornocat,
         risco: this.retornorisco,
         dentista: this.retornodent,
-        clinica: this.retornocli,
+        clinicaid: this.retornocliid,
         obs: this.retornoobs
       }
       this.$store.dispatch('criarRetorno', dadosRetorno)

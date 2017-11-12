@@ -3,83 +3,82 @@
     <v-card class="elevation-1">
     <v-card-title>
       <div>
-        <h3>Ficha do Paciente</h3>
+        <h3 class="blue--text">ficha<b>paciente</b></h3>
       </div>
     </v-card-title>
-    <v-divider></v-divider>
     <v-card-text v-if="!editar">
     <v-layout row>
       <v-flex xs12>
           <v-layout row>
             <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
-              <p>Nome:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.nome }}</h5>
+              <p class="mb-0">Nome:</p>
+              <h5><b>{{ unicoPaciente.nome }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs6 sm4 offset-sm1 md3 offset-md2 lg2 offset-lg2>
-              <p>Código:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.codigo }}</h5>
+              <p class="mb-0">Código:</p>
+              <h5><b>{{ unicoPaciente.codigo }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs8 sm6 offset-sm1 md4 offset-md2 mr-2>
-              <p>Telefone:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.telefone1 }}</h5>
+              <p class="mb-0">Telefone:</p>
+              <h5><b>{{ unicoPaciente.telefone1 }}</b></h5>
             </v-flex>
             <v-flex xs4 sm4>
-              <p>Tipo Tel.:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.teletipo1 }}</h5>
+              <p class="mb-0">Tipo Tel.:</p>
+              <h5><b>{{ unicoPaciente.teletipo1 }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex v-if="unicoPaciente.telefone2" xs8 sm6 offset-sm1 md4 offset-md2 mr-2>
-              <p>Telefone:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.telefone2 }}</h5>
+              <p> class="mb-0"Telefone:</p>
+              <h5><b>{{ unicoPaciente.telefone2 }}</b></h5>
             </v-flex>
             <v-flex v-if="unicoPaciente.telefone2" xs4 sm4>
-              <p>Tipo Tel.:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.teletipo2 }}</h5>
+              <p class="mb-0">Tipo Tel.:</p>
+              <h5><b>{{ unicoPaciente.teletipo2 }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm8 offset-sm1 md6 offset-md2 lg4 offset-lg2>
-              <p>Email:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.email }}</h5>
+              <p class="mb-0">Email:</p>
+              <h5><b>{{ unicoPaciente.email }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
-              <p>Endereço:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.endereco }}</h5>
+              <p class="mb-0">Endereço:</p>
+              <h5><b>{{ unicoPaciente.endereco }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs8 sm6 offset-sm1 md4 offset-md2 mr-2>
-              <p>Cidade:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.cidade }}</h5>
+              <p  class="mb-0">Cidade:</p>
+              <h5><b>{{ unicoPaciente.cidade }}</b></h5>
             </v-flex>
             <v-flex xs4 sm4>
-              <p>Estado:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.estado }}</h5>
+              <p  class="mb-0">Estado:</p>
+              <h5><b>{{ unicoPaciente.estado }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
-              <p>Sexo:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.sexo }}</h5>
+              <p class="mb-0">Sexo:</p>
+              <h5><b>{{ unicoPaciente.sexo }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs6 sm4 offset-sm1 md2 offset-md2>
-              <p>Data Nascimento:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.datanasc }}</h5>
+              <p class="mb-0">Data Nascimento:</p>
+              <h5><b>{{ unicoPaciente.datanasc }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
-              <p>Observações Gerais:</p>
-              <h5 class="grey lighten-4">{{ unicoPaciente.obs }}</h5>
+              <p class="mb-0">Observações Gerais:</p>
+              <h5><b>{{ unicoPaciente.obs }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -87,7 +86,6 @@
               <v-btn
                 small
                 class="primary"
-                type="submit"
                 @click="editarUnicoPaciente"
                 :loading="loading">Editar Dados
                 <span slot="loader" class="custom-loader">
@@ -104,7 +102,7 @@
     <v-layout row>
             <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2>
               <v-btn
-                class="error"
+                class="error mb-4"
                 type="submit"
                 @click="editar=!editar"
                 :loading="loading">CANCELAR EDIÇÃO
@@ -379,7 +377,8 @@ export default {
         payloadPaciente.obs = this.pacobs
       }
       this.$store.dispatch('editarPaciente', payloadPaciente)
-      this.$router.push('/pacientes')
+      this.editar = !this.editar
+      this.$router.push('/paciente/' + this.id)
       this.$store.dispatch('todosPacientes')
     }
   }
