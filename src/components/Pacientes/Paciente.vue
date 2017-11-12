@@ -31,23 +31,23 @@
               <h5><b>{{ unicoPaciente.teletipo1 }}</b></h5>
             </v-flex>
           </v-layout>
-          <v-layout row>
-            <v-flex v-if="unicoPaciente.telefone2" xs8 sm6 offset-sm1 md4 offset-md2 mr-2>
+          <v-layout row v-if="unicoPaciente.telefone2">
+            <v-flex xs8 sm6 offset-sm1 md4 offset-md2 mr-2>
               <p> class="mb-0"Telefone:</p>
               <h5><b>{{ unicoPaciente.telefone2 }}</b></h5>
             </v-flex>
-            <v-flex v-if="unicoPaciente.telefone2" xs4 sm4>
+            <v-flex xs4 sm4>
               <p class="mb-0">Tipo Tel.:</p>
               <h5><b>{{ unicoPaciente.teletipo2 }}</b></h5>
             </v-flex>
           </v-layout>
-          <v-layout row>
+          <v-layout row v-if="unicoPaciente.email">
             <v-flex xs12 sm8 offset-sm1 md6 offset-md2 lg4 offset-lg2>
               <p class="mb-0">Email:</p>
               <h5><b>{{ unicoPaciente.email }}</b></h5>
             </v-flex>
           </v-layout>
-          <v-layout row>
+          <v-layout row v-if="unicoPaciente.endereco">
             <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
               <p class="mb-0">Endereço:</p>
               <h5><b>{{ unicoPaciente.endereco }}</b></h5>
@@ -75,7 +75,7 @@
               <h5><b>{{ unicoPaciente.datanasc }}</b></h5>
             </v-flex>
           </v-layout>
-          <v-layout row>
+          <v-layout row v-if="unicoPaciente.obs">
             <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
               <p class="mb-0">Observações Gerais:</p>
               <h5><b>{{ unicoPaciente.obs }}</b></h5>
@@ -100,18 +100,18 @@
     </v-card-text>
     <v-card-text v-else>
     <v-layout row>
-            <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2>
-              <v-btn
-                class="error mb-4"
-                type="submit"
-                @click="editar=!editar"
-                :loading="loading">CANCELAR EDIÇÃO
-                <span slot="loader" class="custom-loader">
-                  <v-icon light>cached</v-icon>
-                </span>
-              </v-btn>
-            </v-flex>
-          </v-layout>
+      <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2>
+        <v-btn
+          class="error mb-4"
+          type="submit"
+          @click="editar=!editar"
+          :loading="loading">CANCELAR EDIÇÃO
+          <span slot="loader" class="custom-loader">
+            <v-icon light>cached</v-icon>
+          </span>
+        </v-btn>
+      </v-flex>
+    </v-layout>
     <v-layout row>
       <v-flex xs12>
         <form @submit.prevent="atualizarPaciente">

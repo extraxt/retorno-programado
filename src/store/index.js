@@ -5,6 +5,7 @@ import paciente from './paciente'
 import user from './user'
 import clinica from './clinica'
 import retorno from './retorno'
+import dentista from './dentista'
 import compartilhado from './compartilhado'
 import meetup from './meetup'
 
@@ -17,6 +18,7 @@ export const store = new Vuex.Store({
     clinica: clinica,
     paciente: paciente,
     retorno: retorno,
+    dentista: dentista,
     meetup: meetup
   }
 })

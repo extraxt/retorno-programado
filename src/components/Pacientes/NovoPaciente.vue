@@ -229,8 +229,8 @@ export default {
       }
       console.log(dadosPaciente)
       this.$store.dispatch('criarPaciente', dadosPaciente)
-      this.$router.push('/pacientes')
       this.$store.dispatch('todosPacientes')
+      this.$router.push('/pacientes')
     }
   }
 }

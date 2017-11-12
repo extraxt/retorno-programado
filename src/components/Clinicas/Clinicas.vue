@@ -26,6 +26,7 @@
               hide-actions
               v-bind:items="todasClinicas"
               v-bind:search="search"
+              no-data-text="Nenhuma clínica cadastrada até o momento."
             >
             <template slot="items" slot-scope="props">
               <td>

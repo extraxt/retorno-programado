@@ -45,7 +45,7 @@
               <h5><b>{{ unicoRetorno.especialidade }}</b></h5>
             </v-flex>
           </v-layout>
-          <v-layout row justify-center>
+          <v-layout row v-if="unicoRetorno.risco" justify-center>
             <v-flex xs12 sm12 md6 offset-md1 lg4>
               <p class="mb-0">Risco:</p>
               <h5><b>{{ unicoRetorno.risco }}</b></h5>
@@ -63,7 +63,7 @@
               <h5><b>unicoDentista.nome</b></h5>
             </v-flex>
           </v-layout>
-          <v-layout row justify-center>
+          <v-layout row v-if="unicoRetorno.obs" justify-center>
             <v-flex xs12 sm12 md6 offset-md1 lg4>
               <p class="mb-0">Observações Gerais:</p>
               <h5><b>{{ unicoRetorno.obs }}</b></h5>

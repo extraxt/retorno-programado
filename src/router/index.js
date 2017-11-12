@@ -11,9 +11,12 @@ import NovoPaciente from '@/components/Pacientes/NovoPaciente'
 import Paciente from '@/components/Pacientes/Paciente'
 import NovaClinica from '@/components/Clinicas/NovaClinica'
 import Clinicas from '@/components/Clinicas/Clinicas'
+import Clinica from '@/components/Clinicas/Clinica'
 import NovoRetorno from '@/components/Retornos/NovoRetorno'
 import Retornos from '@/components/Retornos/Retornos'
 import Retorno from '@/components/Retornos/Retorno'
+import NovoDentista from '@/components/Dentistas/NovoDentista'
+import Dentistas from '@/components/Dentistas/Dentistas'
 import AuthGuard from './auth-guard'
 
 Vue.use(Router)
@@ -80,6 +83,13 @@ export default new Router({
       beforeEnter: AuthGuard
     },
     {
+      path: '/clinica/:id',
+      name: 'Clínica',
+      props: true,
+      component: Clinica,
+      beforeEnter: AuthGuard
+    },
+    {
       path: '/novaclinica',
       name: 'Nova Clínica',
       component: NovaClinica,
@@ -102,6 +112,18 @@ export default new Router({
       name: 'Retorno',
       props: true,
       component: Retorno,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/novodentista',
+      name: 'Novo Dentista',
+      component: NovoDentista,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/dentistas',
+      name: 'Dentistas',
+      component: Dentistas,
       beforeEnter: AuthGuard
     }
   ],

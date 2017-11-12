@@ -68,6 +68,49 @@ export default {
         console.log(error)
         commit('setLoading', false)
       })
+    },
+    editarClinica ({commit, getters}, payload) {
+      commit('setLoading', true)
+      const usuarioId = getters.user.id
+      const updateObj = {}
+      if (payload.nome) {
+        updateObj.nome = payload.nome
+      }
+      if (payload.telefone1) {
+        updateObj.telefone1 = payload.telefone1
+      }
+      if (payload.teletipo1) {
+        updateObj.teletipo1 = payload.teletipo1
+      }
+      if (payload.telefone2) {
+        updateObj.telefone2 = payload.telefone2
+      }
+      if (payload.teletipo2) {
+        updateObj.teletipo2 = payload.teletipo2
+      }
+      if (payload.email) {
+        updateObj.email = payload.email
+      }
+      if (payload.endereco) {
+        updateObj.endereco = payload.endereco
+      }
+      if (payload.cidade) {
+        updateObj.cidade = payload.cidade
+      }
+      if (payload.estado) {
+        updateObj.estado = payload.estado
+      }
+      if (payload.obs) {
+        updateObj.obs = payload.obs
+      }
+      firebase.database().ref(usuarioId + '/clinicas').child(payload.id).update(updateObj)
+      .then(() => {
+        commit('setLoading', false)
+      })
+      .catch(error => {
+        console.log(error)
+        commit('setLoading', false)
+      })
     }
   },
   getters: {

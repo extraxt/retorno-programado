@@ -74,10 +74,10 @@
         ]
         if (this.usuarioEstaAutenticado) {
           menuItems = [
-            {icone: 'line_weight', titulo: 'Todos os Retornos', link: '/retornos'},
-            {icone: 'note_add', titulo: 'Novo Retorno', link: '/novoretorno'},
+            {icone: 'settings_backup_restore', titulo: 'Retornos', link: '/retornos'},
             {icone: 'account_box', titulo: 'Pacientes', link: '/pacientes'},
-            {icone: 'home', titulo: 'Clínicas', link: '/clinicas'}
+            {icone: 'home', titulo: 'Clínicas', link: '/clinicas'},
+            {icone: 'account_box', titulo: 'Dentistas', link: '/dentistas'}
           ]
         }
         return menuItems
