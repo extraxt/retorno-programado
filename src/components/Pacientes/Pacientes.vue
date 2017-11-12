@@ -5,7 +5,7 @@
         <v-toolbar class="blue lighten-1 elevation-1">
           <v-toolbar-title class="white--text"><h4 class="mb-0">todos<b>pacientes</b></h4></v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn small fab to="/novopaciente" class="green lighten-1 white--text">
+          <v-btn small fab to="/novopaciente" class="green lighten-1 white--text elevation-1">
             <v-icon>add</v-icon>
           </v-btn>
         </v-toolbar>

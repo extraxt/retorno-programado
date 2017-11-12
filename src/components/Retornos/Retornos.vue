@@ -2,32 +2,33 @@
   <v-container mt-0>
     <v-layout>
         <v-flex>
-        <v-toolbar class="white elevation-1">
-          <v-toolbar-title><h4 class="mb-0">todos<b>retornos</b></h4></v-toolbar-title>
+        <v-toolbar class="blue lighten-1 elevation-1">
+          <v-toolbar-title class="white--text"><h4 class="mb-0">todos<b>retornos</b></h4></v-toolbar-title>
           <v-spacer></v-spacer>
+          <v-btn small fab to="/novoretorno" class="green lighten-1 white--text elevation-1">
+            <v-icon>add</v-icon>
+          </v-btn>
         </v-toolbar>
       </v-flex>
     </v-layout>
     <v-layout>
-      <v-flex xs12>
+      <v-flex>
           <v-layout row wrap mt-4>
-            <v-flex class="mb-4 mr-1">
+            <v-flex class="mb-4 mr-1" v-for="retorno in filtradoRetornos" :key="retorno.id" xs12 sm12 md12 lg12>
                 <v-card class="elevation-1 text-xs-center">
-                    <v-toolbar flat class="red darken-1">
-                        <div><b class="white--text text-xs-center">Remover os pontos e falar sobre Implante um abraço</b></div>
-                    </v-toolbar>
-                    <v-divider></v-divider>
                     <v-card-text class="grey lighten-3">
                         <div>
-                            <h2 class="headline mb-0">Rafael de Oliveira</h2>
-                            <div class="grey--text">30 anos - Código: AP</div>
+                            <div><b>{{ retorno.nomepac }}</b></div>
+                            <div class="grey--text">Código: AP</div>
+                            <h2 class="headline mb-0">{{ retorno.titulo }}</h2>
                             <br>
-                            <h4 class="headline mb-0"><b>6 meses</b></h4>
-                            <div class="grey--text">01/01/2017 - 01/12/2017</div>
+                            <h4 class="headline mb-0">Retornar em:<b> {{retorno.datavalidade }}</b></h4>
+                            <div class="grey--text">Cadastrado em: {{ retorno.datacadastro }}</div>
+                            <div class="grey--text">Período escolhido: {{ retorno.tempo }} dias</div>
                         </div>
                         <v-btn
                             color="grey darken-2 elevation-1"
-                            to="/retorno/-Kyl3mE0dgYRh8wF_Zrk"
+                            :to="'/retorno/' + retorno.id"
                             dark
                             small
                             absolute
@@ -54,8 +55,8 @@ export default {
     }
   },
   computed: {
-    todosRetornos () {
-      return this.$store.getters.todosRetornos
+    filtradoRetornos () {
+      return this.$store.getters.filtradoRetornos
     }
   }
 }

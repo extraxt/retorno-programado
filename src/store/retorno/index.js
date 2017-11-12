@@ -126,19 +126,30 @@ export default {
           return retorno.id === retornoId
         })
       }
-    }
-    /* filtradoRetornos (state) {
+    },
+    filtradoRetornos (state, getters) {
       const obj = state.todosRetornos.sort((retornoA, retornoB) => {
         return retornoA.datavalidade > retornoB.datavalidade
       })
       const array = []
       for (let key in obj) {
+        const nomepaciente = getters.unicoPaciente(obj[key].pacid).nome
         array.push({
-          text: obj[key].nome + ' ( ' + obj[key].especialidade + ' )',
-          value: obj[key].id
+          id: obj[key].id,
+          usuarioId: obj[key].usuarioId,
+          titulo: obj[key].titulo,
+          nomepac: nomepaciente,
+          datacadastro: obj[key].datacadastro,
+          datavalidade: obj[key].datavalidade,
+          tempo: obj[key].tempo,
+          especialidade: obj[key].especialidade,
+          risco: obj[key].risco,
+          dentista: obj[key].dentista,
+          clinicaid: obj[key].clinicaid,
+          obs: obj[key].obs
         })
       }
       return array
-     } */
+    }
   }
 }

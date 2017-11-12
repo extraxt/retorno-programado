@@ -259,7 +259,7 @@ export default {
         obs: this.retornoobs
       }
       this.$store.dispatch('criarRetorno', dadosRetorno)
-      this.$router.push('/')
+      this.$router.push('/retornos')
     }
   }
 }
