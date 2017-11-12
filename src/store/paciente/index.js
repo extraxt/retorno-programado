@@ -74,43 +74,43 @@ export default {
       commit('setLoading', true)
       const usuarioId = getters.user.id
       const updateObj = {}
-      if (payload.nome) {
+      if (payload.nome !== undefined) {
         updateObj.nome = payload.nome
       }
-      if (payload.codigo) {
+      if (payload.codigo !== undefined) {
         updateObj.codigo = payload.codigo
       }
-      if (payload.telefone1) {
+      if (payload.telefone1 !== undefined) {
         updateObj.telefone1 = payload.telefone1
       }
-      if (payload.teletipo1) {
+      if (payload.teletipo1 !== undefined) {
         updateObj.teletipo1 = payload.teletipo1
       }
-      if (payload.telefone2) {
+      if (payload.telefone2 !== undefined) {
         updateObj.telefone2 = payload.telefone2
       }
-      if (payload.teletipo2) {
+      if (payload.teletipo2 !== undefined) {
         updateObj.teletipo2 = payload.teletipo2
       }
-      if (payload.email) {
+      if (payload.email !== undefined) {
         updateObj.email = payload.email
       }
-      if (payload.endereco) {
+      if (payload.endereco !== undefined) {
         updateObj.endereco = payload.endereco
       }
-      if (payload.cidade) {
+      if (payload.cidade !== undefined) {
         updateObj.cidade = payload.cidade
       }
-      if (payload.estado) {
+      if (payload.estado !== undefined) {
         updateObj.estado = payload.estado
       }
-      if (payload.sexo) {
+      if (payload.sexo !== undefined) {
         updateObj.sexo = payload.sexo
       }
-      if (payload.datanasc) {
+      if (payload.datanasc !== undefined) {
         updateObj.datanasc = payload.datanasc
       }
-      if (payload.obs) {
+      if (payload.obs !== undefined) {
         updateObj.obs = payload.obs
       }
       firebase.database().ref(usuarioId + '/pacientes').child(payload.id).update(updateObj)

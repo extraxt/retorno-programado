@@ -60,7 +60,7 @@
           <v-layout row justify-center>
             <v-flex xs12 sm12 md6 offset-md1 lg4>
               <p class="mb-0">Dentista:</p>
-              <h5><b>unicoDentista.nome</b></h5>
+              <h5><b>{{ unicoDentista.nome }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row v-if="unicoRetorno.obs" justify-center>
@@ -120,6 +120,10 @@ export default {
     unicaClinica () {
       const codigoclinica = this.unicoRetorno.clinicaid
       return this.$store.getters.unicaClinica(codigoclinica)
+    },
+    unicoDentista () {
+      const codigodentista = this.unicoRetorno.dentistaid
+      return this.$store.getters.unicoDentista(codigodentista)
     },
     filtradoClinicas () {
       return this.$store.getters.filtradoClinicas
@@ -184,7 +188,7 @@ export default {
       }
       this.$store.dispatch('editarRetorno', payloadRetorno)
       this.$router.push('/retornos')
-      this.$store.dispatch('todosRetornos')
+      this.$store.dispatch('filtradoRetornos')
     }
   }
 }

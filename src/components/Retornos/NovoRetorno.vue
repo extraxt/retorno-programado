@@ -84,7 +84,7 @@
           <v-layout row justify-center>
             <v-flex xs12 sm12 md6 offset-md1 lg4>
               <v-select
-                prepend-icon="bookmark"
+                prepend-icon="warning"
                 v-bind:items="riscos"
                 v-model="retornorisco"
                 label="Risco"
@@ -119,14 +119,21 @@
             <v-flex xs12 sm12 md6 offset-md1 lg4>
               <v-select
                 prepend-icon="assignment_ind"
-                v-bind:items="dentistas"
-                v-model="retornodent"
+                v-bind:items="filtradoDentistas"
+                v-model="retornodentid"
                 label="Dentista"
                 single-line
                 no-data-text="Nenhum dentista selecionado"
                 clearable
-                required
-              ></v-select>
+                required>
+                <template slot="no-data">
+                  <v-layout row justify-center>
+                    <v-btn small to="/novodentista" class="green lighten-1 white--text">
+                      <v-icon>add</v-icon> Adicione novo Dentista
+                    </v-btn>
+                  </v-layout>
+                </template>
+                </v-select>
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
@@ -201,7 +208,7 @@ export default {
       retornotempo: '',
       retornocat: '',
       retornorisco: '',
-      retornodent: '',
+      retornodentid: '',
       retornocliid: '',
       retornoobs: '',
       dialog: false
@@ -229,12 +236,15 @@ export default {
     filtradoClinicas () {
       return this.$store.getters.filtradoClinicas
     },
+    filtradoDentistas () {
+      return this.$store.getters.filtradoDentistas
+    },
     formValido () {
       return this.retornotit !== '' &&
       this.retornopac !== '' &&
       this.retornotempo !== '' &&
       this.retornocat !== '' &&
-      this.retornodent !== '' &&
+      this.retornodentid !== '' &&
       this.retornocliid !== ''
     },
     loading () {
@@ -254,10 +264,11 @@ export default {
         tempo: this.retornotempo,
         especialidade: this.retornocat,
         risco: this.retornorisco,
-        dentista: this.retornodent,
+        dentistaid: this.retornodentid,
         clinicaid: this.retornocliid,
         obs: this.retornoobs
       }
+      console.log(dadosRetorno)
       this.$store.dispatch('criarRetorno', dadosRetorno)
       this.$store.dispatch('filtradoRetornos')
       this.$router.push('/retornos')

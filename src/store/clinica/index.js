@@ -28,8 +28,6 @@ export default {
       }
       firebase.database().ref(usuarioId + '/clinicas').push(dadosClinica)
       .then(data => {
-        console.log('Deu certo o registro!')
-        console.log(data)
         commit('setLoading', false)
       }
       )
@@ -73,34 +71,34 @@ export default {
       commit('setLoading', true)
       const usuarioId = getters.user.id
       const updateObj = {}
-      if (payload.nome) {
+      if (payload.nome !== undefined) {
         updateObj.nome = payload.nome
       }
-      if (payload.telefone1) {
+      if (payload.telefone1 !== undefined) {
         updateObj.telefone1 = payload.telefone1
       }
-      if (payload.teletipo1) {
+      if (payload.teletipo1 !== undefined) {
         updateObj.teletipo1 = payload.teletipo1
       }
-      if (payload.telefone2) {
+      if (payload.telefone2 !== undefined) {
         updateObj.telefone2 = payload.telefone2
       }
-      if (payload.teletipo2) {
+      if (payload.teletipo2 !== undefined) {
         updateObj.teletipo2 = payload.teletipo2
       }
-      if (payload.email) {
+      if (payload.email !== undefined) {
         updateObj.email = payload.email
       }
-      if (payload.endereco) {
+      if (payload.endereco !== undefined) {
         updateObj.endereco = payload.endereco
       }
-      if (payload.cidade) {
+      if (payload.cidade !== undefined) {
         updateObj.cidade = payload.cidade
       }
-      if (payload.estado) {
+      if (payload.estado !== undefined) {
         updateObj.estado = payload.estado
       }
-      if (payload.obs) {
+      if (payload.obs !== undefined) {
         updateObj.obs = payload.obs
       }
       firebase.database().ref(usuarioId + '/clinicas').child(payload.id).update(updateObj)

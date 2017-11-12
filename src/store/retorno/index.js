@@ -13,7 +13,6 @@ export default {
     criarRetorno ({commit, getters}, payload) {
       commit('setLoading', true)
       const usuarioId = getters.user.id
-      console.log('Pegou o id do Usuario')
       const dadosRetorno = {
         usuarioId: usuarioId,
         titulo: payload.tit,
@@ -23,18 +22,16 @@ export default {
         tempo: payload.tempo,
         especialidade: payload.especialidade,
         risco: payload.risco,
-        dentista: payload.dentista,
+        dentistaid: payload.dentistaid,
         clinicaid: payload.clinicaid,
         obs: payload.obs
       }
       firebase.database().ref(usuarioId + '/retornos').push(dadosRetorno)
       .then(data => {
         commit('setLoading', false)
-        console.log('Criou Retorno!')
       })
       .catch(error => {
         console.log(error)
-        console.log('fodeu')
         commit('setLoading', false)
       })
     },
@@ -56,7 +53,7 @@ export default {
             tempo: obj[key].tempo,
             especialidade: obj[key].especialidade,
             risco: obj[key].risco,
-            dentista: obj[key].dentista,
+            dentistaid: obj[key].dentistaid,
             clinicaid: obj[key].clinicaid,
             obs: obj[key].obs
           })
@@ -71,42 +68,42 @@ export default {
     },
     editarRetorno ({commit, getters}, payload) {
       commit('setLoading', true)
+      console.log('Entrou na Store')
       const usuarioId = getters.user.id
       const updateObj = {}
-      if (payload.tit) {
+      if (payload.tit !== undefined) {
         updateObj.tit = payload.tit
       }
-      if (payload.pacid) {
+      if (payload.pacid !== undefined) {
         updateObj.pacid = payload.pacid
       }
-      if (payload.datacadastro) {
+      if (payload.datacadastro !== undefined) {
         updateObj.datacadastro = payload.datacadastro
       }
-      if (payload.datavalidade) {
+      if (payload.datavalidade !== undefined) {
         updateObj.datavalidade = payload.datavalidade
       }
-      if (payload.tempo) {
+      if (payload.tempo !== undefined) {
         updateObj.tempo = payload.tempo
       }
-      if (payload.especialidade) {
+      if (payload.especialidade !== undefined) {
         updateObj.especialidade = payload.especialidade
       }
-      if (payload.risco) {
+      if (payload.risco !== undefined) {
         updateObj.risco = payload.risco
       }
-      if (payload.dentista) {
-        updateObj.dentista = payload.dentista
+      if (payload.dentistaid !== undefined) {
+        updateObj.dentistaid = payload.dentistaid
       }
-      if (payload.clinicaid) {
+      if (payload.clinicaid !== undefined) {
         updateObj.clinicaid = payload.clinicaid
       }
-      if (payload.obs) {
+      if (payload.obs !== undefined) {
         updateObj.obs = payload.obs
       }
       firebase.database().ref(usuarioId + '/retornos').child(payload.id).update(updateObj)
       .then(() => {
         commit('setLoading', false)
-        console.log('Editou o Retorno!')
       })
       .catch(error => {
         console.log(error)

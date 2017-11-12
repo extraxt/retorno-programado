@@ -17,6 +17,7 @@ import Retornos from '@/components/Retornos/Retornos'
 import Retorno from '@/components/Retornos/Retorno'
 import NovoDentista from '@/components/Dentistas/NovoDentista'
 import Dentistas from '@/components/Dentistas/Dentistas'
+import Dentista from '@/components/Dentistas/Dentista'
 import AuthGuard from './auth-guard'
 
 Vue.use(Router)
@@ -124,6 +125,13 @@ export default new Router({
       path: '/dentistas',
       name: 'Dentistas',
       component: Dentistas,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/dentista/:id',
+      name: 'Dentista',
+      props: true,
+      component: Dentista,
       beforeEnter: AuthGuard
     }
   ],

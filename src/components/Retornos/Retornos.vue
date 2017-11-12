@@ -13,7 +13,7 @@
     </v-layout>
     <v-layout>
       <v-flex>
-          <v-layout row wrap mt-4>
+          <v-layout row wrap mt-4 v-if="filtradoRetornos">
             <v-flex class="mb-4 mr-1" v-for="retorno in filtradoRetornos" :key="retorno.id" xs12 sm12 md12 lg12>
                 <v-card class="elevation-1 text-xs-center">
                     <v-card-text class="grey lighten-3">
@@ -39,6 +39,11 @@
                         </v-btn>
                     </v-card-text>
                 </v-card>
+            </v-flex>
+          </v-layout>
+          <v-layout row v-else>
+            <v-flex>
+              <h4 class="grey--text text-xs-center">Nenhum Retorno cadastrado.</h4>
             </v-flex>
           </v-layout>
       </v-flex>
