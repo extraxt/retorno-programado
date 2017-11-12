@@ -6,12 +6,16 @@ import router from './router'
 import { store } from './store'
 import DateFilter from './filters/date'
 import AlertCmp from './components/Shared/Alert'
+import SignIn from './components/User/Signin'
+import SignUp from './components/User/Signup'
 
 Vue.use(Vuetify)
 Vue.config.productionTip = false
 
 Vue.filter('date', DateFilter)
 Vue.component('app-alert', AlertCmp)
+Vue.component('app-sigin', SignIn)
+Vue.component('app-signup', SignUp)
 
 /* eslint-disable no-new */
 new Vue({
@@ -31,6 +35,7 @@ new Vue({
       if (user) {
         this.$store.dispatch('autoSignIn', user)
         this.$store.dispatch('todosPacientes')
+        this.$store.dispatch('todasClinicas')
       }
     })
   }

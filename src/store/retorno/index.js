@@ -13,16 +13,19 @@ export default {
     criarRetorno ({commit, getters}, payload) {
       commit('setLoading', true)
       const usuarioId = getters.user.id
+      console.log('Pegou o id do Usuario')
       const dadosRetorno = {
-        titulo: payload.titulo,
+        usuarioId: usuarioId,
+        titulo: payload.tit,
         pacid: payload.pacid,
+        datacadastro: payload.datacadastro,
+        datavalidade: payload.datavalidade,
         tempo: payload.tempo,
         especialidade: payload.especialidade,
         risco: payload.risco,
         dentista: payload.dentista,
         clinica: payload.clinica,
-        obs: payload.obs,
-        criacao: payload.criacao
+        obs: payload.obs
       }
       firebase.database().ref(usuarioId + '/retornos').push(dadosRetorno)
       .then(data => {
@@ -31,6 +34,7 @@ export default {
       })
       .catch(error => {
         console.log(error)
+        console.log('fodeu')
         commit('setLoading', false)
       })
     },
@@ -44,14 +48,17 @@ export default {
         for (let key in obj) {
           todosRetornos.push({
             id: key,
-            tit: obj[key].tit,
+            usuarioId: obj[key].usuarioId,
+            titulo: obj[key].titulo,
             pacid: obj[key].pacid,
+            datacadastro: obj[key].datacadastro,
+            datavalidade: obj[key].datavalidade,
             tempo: obj[key].tempo,
             especialidade: obj[key].especialidade,
             risco: obj[key].risco,
             dentista: obj[key].dentista,
-            obs: obj[key].obs,
-            criacao: obj[key].criacao
+            clinica: obj[key].clinica,
+            obs: obj[key].obs
           })
         }
         commit('todosRetornos', todosRetornos)

@@ -8,11 +8,11 @@
       </div>
     </v-card-title>
     <v-card-text>
-    <v-layout row>
+    <v-layout row justify-center>
       <v-flex xs12>
         <form @submit.prevent="onNovoRetorno">
-          <v-layout row>
-            <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
+          <v-layout row justify-center>
+            <v-flex xs12 sm12 md6 offset-md1 lg4>
               <v-text-field
               prepend-icon="comment"
               v-model="retornotit"
@@ -20,12 +20,13 @@
               hint="Título do retorno"
               :rules="[(v) => v.length <= 50 || 'Máximo de 50 caracteres para o título']"
               :counter="50"
+              clearable
               required
             ></v-text-field>
             </v-flex>
           </v-layout>
-          <v-layout row>
-            <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
+          <v-layout row justify-center>
+            <v-flex xs12 sm12 md6 offset-md1 lg4>
               <v-select
                 v-bind:items="filtradoPacientes"
                 v-model="retornopac"
@@ -46,7 +47,7 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+            <v-flex xs12 sm12 md6 offset-md1 lg4>
               <v-select
                 prepend-icon="restore"
                 v-bind:items="opcoestempo"
@@ -62,12 +63,12 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+            <v-flex xs12 sm12 md6 offset-md1 lg4>
               <p v-if="retornotempo">Previsão do Retorno: {{ retornovolta }}</p>
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+            <v-flex xs12 sm12 md6 offset-md1 lg4>
               <v-select
                 prepend-icon="bookmark"
                 v-bind:items="categorias"
@@ -81,7 +82,7 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+            <v-flex xs12 sm12 md6 offset-md1 lg4>
               <v-select
                 prepend-icon="bookmark"
                 v-bind:items="riscos"
@@ -94,21 +95,28 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+            <v-flex xs12 sm12 md6 offset-md1 lg4>
               <v-select
-                prepend-icon="home"
-                v-bind:items="clinicas"
+                v-bind:items="filtradoClinicas"
                 v-model="retornocli"
                 label="Clínica"
-                single-line
-                no-data-text="Nenhuma clínica selecionada"
-                clearable
+                autocomplete
                 required
-              ></v-select>
+                prepend-icon="home"
+                no-data-text="Esta clínica não está registrada!"
+                clearable>
+                <template slot="no-data">
+                  <v-layout row justify-center>
+                    <v-btn small to="/novaclinica" class="green lighten-1 white--text">
+                      <v-icon>add</v-icon> Adicione nova Clínica
+                    </v-btn>
+                  </v-layout>
+                </template>
+              </v-select>
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm4 offset-sm1 md4 offset-md1 lg4>
+            <v-flex xs12 sm12 md6 offset-md1 lg4>
               <v-select
                 prepend-icon="assignment_ind"
                 v-bind:items="dentistas"
@@ -121,8 +129,8 @@
               ></v-select>
             </v-flex>
           </v-layout>
-          <v-layout row>
-            <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
+          <v-layout row justify-center>
+            <v-flex xs12 sm12 md6 offset-md1 lg4>
               <v-text-field
                 prepend-icon="reorder"
                 name="observacoes"
@@ -134,8 +142,8 @@
               ></v-text-field>
             </v-flex>
           </v-layout>
-          <v-layout row>
-            <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2>
+          <v-layout row justify-center>
+            <v-flex xs12 sm12 md6 offset-md1 lg4 class="text-xs-center">
               <v-btn
                 class="primary"
                 type="submit"
@@ -161,7 +169,6 @@
 export default {
   data () {
     return {
-      clinicas: [],
       dentistas: ['Dr. Rafael'],
       opcoestempo: [
         {titulo: '7 Dias', dias: 7},
@@ -188,7 +195,7 @@ export default {
         'Prótese',
         'Radiologia'
       ],
-      riscos: [],
+      riscos: ['Alto', 'Médio', 'Baixo'],
       retornotit: '',
       retornopac: '',
       retornotempo: '',
@@ -201,6 +208,13 @@ export default {
     }
   },
   computed: {
+    retornodata () {
+      const datahoje = new Date()
+      const diahoje = datahoje.getDate()
+      const meshoje = datahoje.getMonth() + 1
+      const anohoje = datahoje.getFullYear()
+      return diahoje + '/' + meshoje + '/' + anohoje
+    },
     retornovolta () {
       const dataoriginal = new Date()
       dataoriginal.setDate(dataoriginal.getDate() + this.retornotempo)
@@ -211,6 +225,9 @@ export default {
     },
     filtradoPacientes () {
       return this.$store.getters.filtradoPacientes
+    },
+    filtradoClinicas () {
+      return this.$store.getters.filtradoClinicas
     },
     formValido () {
       return this.retornotit !== '' &&
@@ -232,13 +249,14 @@ export default {
       const dadosRetorno = {
         tit: this.retornotit,
         pacid: this.retornopac,
+        datacadastro: this.retornodata,
+        datavalidade: this.retornovolta,
         tempo: this.retornotempo,
         especialidade: this.retornocat,
         risco: this.retornorisco,
         dentista: this.retornodent,
         clinica: this.retornocli,
-        obs: this.retornoobs,
-        criacao: this.retornocria
+        obs: this.retornoobs
       }
       this.$store.dispatch('criarRetorno', dadosRetorno)
       this.$router.push('/')

@@ -3,7 +3,7 @@
     <v-card>
     <v-card-title>
       <div>
-        <h3>Nova Clínica</h3>
+        <h3 class="blue--text">nova<b>clínica</b></h3>
         <p>Preencha o máximo de informações possível.</p>
       </div>
     </v-card-title>

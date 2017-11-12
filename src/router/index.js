@@ -10,6 +10,7 @@ import Pacientes from '@/components/Pacientes/Pacientes'
 import NovoPaciente from '@/components/Pacientes/NovoPaciente'
 import Paciente from '@/components/Pacientes/Paciente'
 import NovaClinica from '@/components/Clinicas/NovaClinica'
+import Clinicas from '@/components/Clinicas/Clinicas'
 import NovoRetorno from '@/components/Retornos/NovoRetorno'
 import Retornos from '@/components/Retornos/Retornos'
 import AuthGuard from './auth-guard'
@@ -71,6 +72,12 @@ export default new Router({
       name: 'Paciente',
       props: true,
       component: Paciente,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/clinicas',
+      name: 'Clínicas',
+      component: Clinicas,
       beforeEnter: AuthGuard
     },
     {
