@@ -12,7 +12,7 @@
       <v-flex xs12>
         <form @submit.prevent="onNovoRetorno">
           <v-layout row justify-center>
-            <v-flex xs12 sm12 md6 offset-md1 lg4>
+            <v-flex xs12 sm12 md6>
               <v-text-field
               prepend-icon="comment"
               v-model="retornotit"
@@ -26,7 +26,7 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm12 md6 offset-md1 lg4>
+            <v-flex xs12 sm12 md6>
               <v-select
                 v-bind:items="filtradoPacientes"
                 v-model="retornopac"
@@ -47,7 +47,7 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm12 md6 offset-md1 lg4>
+            <v-flex xs12 sm12 md6>
               <v-select
                 prepend-icon="restore"
                 v-bind:items="opcoestempo"
@@ -63,12 +63,12 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm12 md6 offset-md1 lg4>
+            <v-flex xs12 sm12 md6>
               <p v-if="retornotempo">Previsão do Retorno: {{ retornovolta }}</p>
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm12 md6 offset-md1 lg4>
+            <v-flex xs12 sm12 md6>
               <v-select
                 prepend-icon="bookmark"
                 v-bind:items="categorias"
@@ -82,7 +82,7 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm12 md6 offset-md1 lg4>
+            <v-flex xs12 sm12 md6>
               <v-select
                 prepend-icon="warning"
                 v-bind:items="riscos"
@@ -95,7 +95,7 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm12 md6 offset-md1 lg4>
+            <v-flex xs12 sm12 md6>
               <v-select
                 v-bind:items="filtradoClinicas"
                 v-model="retornocliid"
@@ -116,13 +116,13 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm12 md6 offset-md1 lg4>
+            <v-flex xs12 sm12 md6>
               <v-select
                 prepend-icon="assignment_ind"
                 v-bind:items="filtradoDentistas"
                 v-model="retornodentid"
                 label="Dentista"
-                single-line
+                autocomplete
                 no-data-text="Nenhum dentista selecionado"
                 clearable
                 required>
@@ -137,7 +137,7 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm12 md6 offset-md1 lg4>
+            <v-flex xs12 sm12 md6>
               <v-text-field
                 prepend-icon="reorder"
                 name="observacoes"
@@ -150,7 +150,7 @@
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
-            <v-flex xs12 sm12 md6 offset-md1 lg4 class="text-xs-center">
+            <v-flex xs12 sm12 md6 class="text-xs-center">
               <v-btn
                 class="primary"
                 type="submit"
@@ -268,9 +268,8 @@ export default {
         clinicaid: this.retornocliid,
         obs: this.retornoobs
       }
-      console.log(dadosRetorno)
       this.$store.dispatch('criarRetorno', dadosRetorno)
-      this.$store.dispatch('filtradoRetornos')
+      this.$store.dispatch('todosRetornos')
       this.$router.push('/retornos')
     }
   }

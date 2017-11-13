@@ -68,7 +68,6 @@ export default {
     },
     editarRetorno ({commit, getters}, payload) {
       commit('setLoading', true)
-      console.log('Entrou na Store')
       const usuarioId = getters.user.id
       const updateObj = {}
       if (payload.tit !== undefined) {
@@ -76,9 +75,6 @@ export default {
       }
       if (payload.pacid !== undefined) {
         updateObj.pacid = payload.pacid
-      }
-      if (payload.datacadastro !== undefined) {
-        updateObj.datacadastro = payload.datacadastro
       }
       if (payload.datavalidade !== undefined) {
         updateObj.datavalidade = payload.datavalidade
