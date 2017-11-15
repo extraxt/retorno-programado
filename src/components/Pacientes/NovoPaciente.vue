@@ -19,6 +19,7 @@
                 label="Nome do Paciente"
                 id="nome"
                 required
+                clearable
                 ></v-text-field>
             </v-flex>
           </v-layout>
@@ -30,6 +31,7 @@
                 label="Cód. do Paciente"
                 id="codigo"
                 required
+                clearable
                 ></v-text-field>
             </v-flex>
           </v-layout>
@@ -42,10 +44,11 @@
                 id="telefone1"
                 prepend-icon="phone"
                 v-mask="telefone"
+                clearable
                 required></v-text-field>
             </v-flex>
             <v-flex xs4 sm4>
-              <v-select v-bind:items="teletipos" v-model="pacteletipo1" label="Tipo:" required>
+              <v-select v-bind:items="teletipos" v-model="pacteletipo1" label="Tipo:" clearable required>
               </v-select>
             </v-flex>
           </v-layout>
@@ -58,10 +61,11 @@
                 id="telefone2"
                 prepend-icon="phone"
                 v-mask="telefone"
+                clearable
                 ></v-text-field>
             </v-flex>
             <v-flex xs4 sm4>
-              <v-select v-bind:items="teletipos" v-model="pacteletipo2" label="Tipo:">
+              <v-select v-bind:items="teletipos" v-model="pacteletipo2" clearable label="Tipo:">
               </v-select>
             </v-flex>
           </v-layout>
@@ -75,6 +79,7 @@
                 v-model="pacemail"
                 placeholder="meu-email@gmail.com"
                 hint="Ex.: meu-email@gmail.com"
+                clearable
                 ></v-text-field>
             </v-flex>
           </v-layout>
@@ -86,6 +91,7 @@
                 id="endereco"
                 v-model="pacendereco"
                 hint="Ex.: Rua das Flores, 123 - Centro"
+                clearable
               ></v-text-field>
             </v-flex>
           </v-layout>
@@ -97,11 +103,12 @@
                 id="cidade"
                 v-model="paccidade"
                 hint="Ex.: Lapa"
+                clearable
                 required
               ></v-text-field>
             </v-flex>
             <v-flex xs4 sm4>
-              <v-select v-model="pacestado" v-bind:items="estados" label="Estado" required></v-select>
+              <v-select v-model="pacestado" v-bind:items="estados" label="Estado" clearable required></v-select>
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -127,6 +134,7 @@
                 v-model="pacdatanasc"
                 id="datanasc"
                 required
+                clearable
               ></v-text-field>
             </v-flex>
           </v-layout>
@@ -139,6 +147,7 @@
                 v-model="pacobs"
                 placeholder="Alguma informação a mais?"
                 multi-line
+                clearable
               ></v-text-field>
             </v-flex>
           </v-layout>
@@ -193,12 +202,26 @@ export default {
   computed: {
     formValido () {
       return this.pacnome !== '' &&
+      this.pacnome !== undefined &&
+      this.pacnome !== null &&
       this.paccodigo !== '' &&
+      this.paccodigo !== undefined &&
+      this.paccodigo !== null &&
       this.pactelefone1 !== '' &&
+      this.pactelefone1 !== undefined &&
+      this.pactelefone1 !== null &&
       this.pacteletipo1 !== '' &&
+      this.pacteletipo1 !== undefined &&
+      this.pacteletipo1 !== null &&
       this.paccidade !== '' &&
+      this.paccidade !== undefined &&
+      this.paccidade !== null &&
       this.pacestado !== '' &&
-      this.pacdatanasc !== ''
+      this.pacestado !== undefined &&
+      this.pacestado !== null &&
+      this.pacdatanasc !== '' &&
+      this.pacdatanasc !== undefined &&
+      this.pacdatanasc !== null
     },
     loading () {
       return this.$store.getters.loading
