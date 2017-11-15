@@ -20,6 +20,7 @@
                 id="nome"
                 placeholder="Ex.: Clínica Odonto"
                 hint="Ex.: Clínica Odonto"
+                clearable
                 required></v-text-field>
             </v-flex>
           </v-layout>
@@ -32,10 +33,11 @@
                 id="telefone1"
                 prepend-icon="phone"
                 v-mask="telefone"
+                clearable
                 required></v-text-field>
             </v-flex>
             <v-flex xs4 sm4>
-              <v-select v-bind:items="teletipos" v-model="clinteletipo1" label="Tipo:" required>
+              <v-select v-bind:items="teletipos" v-model="clinteletipo1" label="Tipo:" required clearable>
               </v-select>
             </v-flex>
           </v-layout>
@@ -48,10 +50,11 @@
                 id="telefone2"
                 prepend-icon="phone"
                 v-mask="telefone"
+                clearable
                 ></v-text-field>
             </v-flex>
             <v-flex xs4 sm4>
-              <v-select v-bind:items="teletipos" v-model="clinteletipo2" label="Tipo:">
+              <v-select v-bind:items="teletipos" v-model="clinteletipo2" label="Tipo:" clearable>
               </v-select>
             </v-flex>
           </v-layout>
@@ -65,6 +68,7 @@
                 v-model="clinemail"
                 placeholder="email-da-clinica@gmail.com"
                 hint="Ex.: email-da-clinica@gmail.com"
+                clearable
                 ></v-text-field>
             </v-flex>
           </v-layout>
@@ -76,6 +80,7 @@
                 id="endereco"
                 v-model="clinendereco"
                 hint="Ex.: Rua das Flores, 123 - Centro"
+                clearable
               ></v-text-field>
             </v-flex>
           </v-layout>
@@ -88,10 +93,11 @@
                 v-model="clincidade"
                 hint="Ex.: Lapa"
                 required
+                clearable
               ></v-text-field>
             </v-flex>
             <v-flex xs4 sm4>
-              <v-select v-model="clinestado" v-bind:items="estados" label="Estado" required></v-select>
+              <v-select v-model="clinestado" v-bind:items="estados" label="Estado" required clearable></v-select>
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -103,6 +109,7 @@
                 v-model="clinobs"
                 placeholder="Alguma informação a mais?"
                 multi-line
+                clearable
               ></v-text-field>
             </v-flex>
           </v-layout>
@@ -153,10 +160,20 @@ export default {
   computed: {
     formValido () {
       return this.clinnome !== '' &&
+      this.clinnome !== undefined &&
+      this.clinnome !== null &&
       this.clintelefone1 !== '' &&
+      this.clintelefone1 !== undefined &&
+      this.clintelefone1 !== null &&
       this.clinteletipo1 !== '' &&
+      this.clinteletipo1 !== undefined &&
+      this.clinteletipo1 !== null &&
       this.clincidade !== '' &&
-      this.clinestado !== ''
+      this.clincidade !== undefined &&
+      this.clincidade !== null &&
+      this.clinestado !== '' &&
+      this.clinestado !== undefined &&
+      this.clinestado !== null
     },
     loading () {
       return this.$store.getters.loading
