@@ -6,6 +6,9 @@ export default {
   },
   mutations: {
     todosRetornos (state, payload) {
+      payload.sort((retornoA, retornoB) => {
+        return retornoA.datavalidade > retornoB.datavalidade
+      })
       state.todosRetornos = payload
     }
   },
@@ -109,9 +112,7 @@ export default {
   },
   getters: {
     todosRetornos (state) {
-      return state.todosRetornos.sort((retornoA, retornoB) => {
-        return retornoA.datavalidade > retornoB.datavalidade
-      })
+      return state.todosRetornos
     },
     unicoRetorno (state) {
       return (retornoId) => {
@@ -121,9 +122,7 @@ export default {
       }
     },
     filtradoRetornos (state, getters) {
-      const obj = state.todosRetornos.sort((retornoA, retornoB) => {
-        return retornoA.datavalidade > retornoB.datavalidade
-      })
+      const obj = state.todosRetornos
       const array = []
       for (let key in obj) {
         const nomepaciente = getters.unicoPaciente(obj[key].pacid).nome

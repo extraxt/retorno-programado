@@ -250,7 +250,6 @@ export default {
         pacdatanasc: this.pacdatanasc,
         pacobs: this.pacobs
       }
-      console.log(dadosPaciente)
       this.$store.dispatch('criarPaciente', dadosPaciente)
       this.$store.dispatch('todosPacientes')
       this.$router.push('/pacientes')

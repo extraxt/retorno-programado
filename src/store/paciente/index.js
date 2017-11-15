@@ -6,6 +6,9 @@ export default {
   },
   mutations: {
     todosPacientes (state, payload) {
+      payload.sort((pacienteA, pacienteB) => {
+        return pacienteA.nome > pacienteB.nome
+      })
       state.todosPacientes = payload
     }
   },
@@ -125,9 +128,7 @@ export default {
   },
   getters: {
     todosPacientes (state) {
-      return state.todosPacientes.sort((pacienteA, pacienteB) => {
-        return pacienteA.nome > pacienteB.nome
-      })
+      return state.todosPacientes
     },
     unicoPaciente (state) {
       return (pacienteId) => {
@@ -137,9 +138,7 @@ export default {
       }
     },
     filtradoPacientes (state) {
-      const obj = state.todosPacientes.sort((pacienteA, pacienteB) => {
-        return pacienteA.nome > pacienteB.nome
-      })
+      const obj = state.todosPacientes
       const array = []
       for (let key in obj) {
         array.push({

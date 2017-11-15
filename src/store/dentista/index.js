@@ -6,6 +6,9 @@ export default {
   },
   mutations: {
     todosDentistas (state, payload) {
+      payload.sort((DentistaA, DentistaB) => {
+        return DentistaA.nome > DentistaB.nome
+      })
       state.todosDentistas = payload
     }
   },
@@ -113,9 +116,7 @@ export default {
   },
   getters: {
     todosDentistas (state) {
-      return state.todosDentistas.sort((DentistaA, DentistaB) => {
-        return DentistaA.nome > DentistaB.nome
-      })
+      return state.todosDentistas
     },
     unicoDentista (state) {
       return (dentistaId) => {
@@ -125,9 +126,7 @@ export default {
       }
     },
     filtradoDentistas (state) {
-      const obj = state.todosDentistas.sort((dentistaA, dentistaB) => {
-        return dentistaA.nome > dentistaB.nome
-      })
+      const obj = state.todosDentistas
       const array = []
       for (let key in obj) {
         array.push({
