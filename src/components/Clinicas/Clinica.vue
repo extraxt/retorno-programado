@@ -69,7 +69,6 @@
           <v-layout row>
             <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2>
               <v-btn
-                v-if="!unicaClinica.ativo"
                 class="primary elevation-1"
                 :loading="loading"
                 @click="editarUnicaClinica"

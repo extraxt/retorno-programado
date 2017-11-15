@@ -54,7 +54,7 @@
           <v-layout row justify-center>
             <v-flex xs12 sm12 md6>
               <p class="mb-0">Clínica:</p>
-              <h5><b>{{ unicaClinica.nome }} - {{ unicaClinica.cidade }}/{{ unicaClinica.estado }} - {{ unicaClinica.ativo ? '' : 'DESATIVADA' }}</b></h5>
+              <h5><b>{{ unicaClinica.nome }} - {{ unicaClinica.cidade }}/{{ unicaClinica.estado }} {{ unicaClinica.ativo ? '' : 'DESATIVADA' }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row justify-center>

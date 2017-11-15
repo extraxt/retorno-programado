@@ -6,6 +6,9 @@ export default {
   },
   mutations: {
     todasClinicas (state, payload) {
+      payload.sort((clinicaA, clinicaB) => {
+        return clinicaA.nome > clinicaB.nome
+      })
       state.todasClinicas = payload
     }
   },
@@ -129,21 +132,17 @@ export default {
   },
   getters: {
     todasClinicas (state) {
-      return state.todasClinicas.sort((clinicaA, clinicaB) => {
-        return clinicaA.nome > clinicaB.nome
-      })
+      return state.todasClinicas
     },
     todasClinicasSemDesativados (state) {
-      const todasClinicasTodas = state.todasClinicas.sort((clinicaA, clinicaB) => {
-        return clinicaA.nome > clinicaB.nome
-      })
-      const array = []
+      const todasClinicasTodas = state.todasClinicas
+      const semDesativados = []
       for (let key in todasClinicasTodas) {
         if (todasClinicasTodas[key].ativo) {
-          array.push(todasClinicasTodas[key])
+          semDesativados.push(todasClinicasTodas[key])
         }
       }
-      return array
+      return semDesativados
     },
     unicaClinica (state) {
       return (clinicaId) => {
@@ -153,9 +152,7 @@ export default {
       }
     },
     filtradoClinicas (state) {
-      const obj = state.todasClinicas.sort((clinicaA, clinicaB) => {
-        return clinicaA.nome > clinicaB.nome
-      })
+      const obj = state.todasClinicas
       const array = []
       for (let key in obj) {
         let ativo = 'DESATIVADA'
@@ -174,9 +171,7 @@ export default {
       return array
     },
     filtradoClinicasSemDesativados (state) {
-      const obj = state.todasClinicas.sort((clinicaA, clinicaB) => {
-        return clinicaA.nome > clinicaB.nome
-      })
+      const obj = state.todasClinicas
       const array = []
       for (let key in obj) {
         if (obj[key].ativo) {
