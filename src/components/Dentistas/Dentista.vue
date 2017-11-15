@@ -324,6 +324,7 @@ export default {
       this.editar = !this.editar
       this.$router.push('/dentista/' + this.id)
       this.$store.dispatch('todosDentistas')
+      window.scrollTo(0, 0)
     },
     created () {
       window.scrollTo(0, 0)

@@ -403,6 +403,7 @@ export default {
       this.editar = !this.editar
       this.$router.push('/paciente/' + this.id)
       this.$store.dispatch('todosPacientes')
+      window.scrollTo(0, 0)
     }
   },
   created () {

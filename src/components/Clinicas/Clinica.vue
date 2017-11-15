@@ -324,6 +324,7 @@ export default {
       this.editar = !this.editar
       this.$router.push('/clinica/' + this.id)
       this.$store.dispatch('todasClinicas')
+      window.scrollTo(0, 0)
     }
   },
   created () {

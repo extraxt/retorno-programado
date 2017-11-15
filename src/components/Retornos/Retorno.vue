@@ -418,6 +418,7 @@ export default {
       this.editar = !this.editar
       this.$router.push('/retorno/' + this.id)
       this.$store.dispatch('todosRetornos')
+      window.scrollTo(0, 0)
     }
   },
   created () {
