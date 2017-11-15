@@ -198,7 +198,6 @@ export default {
         dentestado: this.dentestado,
         dentobs: this.dentobs
       }
-      console.log(dadosDentista)
       this.$store.dispatch('criarDentista', dadosDentista)
       this.$store.dispatch('todosDentistas')
       this.$router.push('/dentistas')

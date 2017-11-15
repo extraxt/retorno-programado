@@ -52,7 +52,7 @@
     },
     computed: {
       todasClinicas () {
-        return this.$store.getters.todasClinicas
+        return this.$store.getters.todasClinicasSemDesativados
       }
     },
     created () {

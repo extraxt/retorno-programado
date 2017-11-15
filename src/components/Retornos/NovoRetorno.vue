@@ -235,7 +235,7 @@ export default {
       return this.$store.getters.filtradoPacientes
     },
     filtradoClinicas () {
-      return this.$store.getters.filtradoClinicas
+      return this.$store.getters.filtradoClinicasSemDesativados
     },
     filtradoDentistas () {
       return this.$store.getters.filtradoDentistas

@@ -46,21 +46,19 @@ export default {
         const todasClinicas = []
         const obj = data.val()
         for (let key in obj) {
-          if (obj[key].ativo) {
-            todasClinicas.push({
-              id: key,
-              nome: obj[key].nome,
-              telefone1: obj[key].telefone1,
-              teletipo1: obj[key].teletipo1,
-              telefone2: obj[key].telefone2,
-              teletipo2: obj[key].teletipo2,
-              email: obj[key].email,
-              endereco: obj[key].endereco,
-              cidade: obj[key].cidade,
-              estado: obj[key].estado,
-              obs: obj[key].obs
-            })
-          }
+          todasClinicas.push({
+            id: key,
+            nome: obj[key].nome,
+            telefone1: obj[key].telefone1,
+            teletipo1: obj[key].teletipo1,
+            telefone2: obj[key].telefone2,
+            teletipo2: obj[key].teletipo2,
+            email: obj[key].email,
+            endereco: obj[key].endereco,
+            cidade: obj[key].cidade,
+            estado: obj[key].estado,
+            obs: obj[key].obs
+          })
         }
         commit('todasClinicas', todasClinicas)
         commit('setLoading', false)
@@ -134,6 +132,18 @@ export default {
         return clinicaA.nome > clinicaB.nome
       })
     },
+    todasClinicasSemDesativados (state) {
+      const todasClinicasTodas = state.todasClinicas.sort((clinicaA, clinicaB) => {
+        return clinicaA.nome > clinicaB.nome
+      })
+      const array = []
+      for (let key in todasClinicasTodas) {
+        if (todasClinicasTodas[key].ativo) {
+          array.push(todasClinicasTodas[key])
+        }
+      }
+      return array
+    },
     unicaClinica (state) {
       return (clinicaId) => {
         return state.todasClinicas.find((clinica) => {
@@ -147,10 +157,33 @@ export default {
       })
       const array = []
       for (let key in obj) {
-        array.push({
-          text: obj[key].nome + ' ( ' + obj[key].cidade + ' )',
-          value: obj[key].id
-        })
+        let ativo = 'DESATIVADA'
+        if (obj[key].ativo) {
+          array.push({
+            text: obj[key].nome + ' ( ' + obj[key].cidade + '/' + obj[key].estado + ' ) ',
+            value: obj[key].id
+          })
+        } else {
+          array.push({
+            text: obj[key].nome + ' ( ' + obj[key].cidade + '/' + obj[key].estado + ' ) ' + ativo,
+            value: obj[key].id
+          })
+        }
+      }
+      return array
+    },
+    filtradoClinicasSemDesativados (state) {
+      const obj = state.todasClinicas.sort((clinicaA, clinicaB) => {
+        return clinicaA.nome > clinicaB.nome
+      })
+      const array = []
+      for (let key in obj) {
+        if (obj[key].ativo) {
+          array.push({
+            text: obj[key].nome + ' ( ' + obj[key].cidade + '/' + obj[key].estado + ' ) ',
+            value: obj[key].id
+          })
+        }
       }
       return array
     }
