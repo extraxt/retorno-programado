@@ -52,7 +52,7 @@
     },
     computed: {
       todosPacientes () {
-        return this.$store.getters.todosPacientes
+        return this.$store.getters.todosPacientesSemDesativados
       }
     },
     created () {

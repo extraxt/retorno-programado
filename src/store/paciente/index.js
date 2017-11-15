@@ -29,7 +29,8 @@ export default {
         cidade: payload.paccidade,
         estado: payload.pacestado,
         datanasc: payload.pacdatanasc,
-        obs: payload.pacobs
+        obs: payload.pacobs,
+        ativo: true
       }
       firebase.database().ref(usuarioId + '/pacientes').push(dadosPaciente)
       .then(data => {
@@ -62,7 +63,8 @@ export default {
             estado: obj[key].estado,
             sexo: obj[key].sexo,
             datanasc: obj[key].datanasc,
-            obs: obj[key].obs
+            obs: obj[key].obs,
+            ativo: obj[key].ativo
           })
         }
         commit('todosPacientes', todosPacientes)
@@ -124,11 +126,35 @@ export default {
         console.log(error)
         commit('setLoading', false)
       })
+    },
+    desativarPaciente ({ commit, getters }, payload) {
+      commit('setLoading', true)
+      const usuarioId = getters.user.id
+      const updateObj = {}
+      updateObj.ativo = false
+      firebase.database().ref(usuarioId + '/pacientes').child(payload).update(updateObj)
+      .then(() => {
+        commit('setLoading', false)
+      })
+      .catch(error => {
+        console.log(error)
+        commit('setLoading', false)
+      })
     }
   },
   getters: {
     todosPacientes (state) {
       return state.todosPacientes
+    },
+    todosPacientesSemDesativados (state) {
+      const todosPacientesTodos = state.todosPacientes
+      const semDesativados = []
+      for (let key in todosPacientesTodos) {
+        if (todosPacientesTodos[key].ativo) {
+          semDesativados.push(todosPacientesTodos[key])
+        }
+      }
+      return semDesativados
     },
     unicoPaciente (state) {
       return (pacienteId) => {
@@ -141,10 +167,31 @@ export default {
       const obj = state.todosPacientes
       const array = []
       for (let key in obj) {
-        array.push({
-          text: obj[key].nome + ' ( ' + obj[key].codigo + ' )',
-          value: obj[key].id
-        })
+        let ativo = 'DESATIVADO(A)'
+        if (obj[key].ativo) {
+          array.push({
+            text: obj[key].nome + ' ( ' + obj[key].codigo + ' )',
+            value: obj[key].id
+          })
+        } else {
+          array.push({
+            text: obj[key].nome + ' ( ' + obj[key].codigo + ' )' + ativo,
+            value: obj[key].id
+          })
+        }
+      }
+      return array
+    },
+    filtradoPacientesSemDesativados (state) {
+      const obj = state.todosPacientes
+      const array = []
+      for (let key in obj) {
+        if (obj[key].ativo) {
+          array.push({
+            text: obj[key].nome + ' ( ' + obj[key].codigo + ' )',
+            value: obj[key].id
+          })
+        }
       }
       return array
     }
