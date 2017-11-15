@@ -7,6 +7,9 @@
       </div>
     </v-card-title>
     <v-card-text v-if="!editar">
+        <v-layout justify-center row v-if="!unicoDentista.ativo">
+          <h4 class="red--text">REGISTRO DESATIVADO.</h4>
+        </v-layout>
         <v-layout row>
             <v-flex xs12>
                 <v-layout row>
@@ -216,6 +219,34 @@
           </form>
         </v-flex>
       </v-layout>
+      <v-layout row>
+        <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2 v-if="!desativar">
+          <v-btn
+            small
+            class="error elevation-1"
+            @click="desativar = !desativar"
+            >Desativar Registro
+            </span>
+          </v-btn>
+        </v-flex>
+        <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2 v-else>
+          <p>Você tem certeza que gostaria de desativar este registro?</p>
+          <v-btn
+            small
+            class="success elevation-1"
+            @click="desativarDentista"
+            >Sim
+            </span>
+          </v-btn>
+          <v-btn
+            small
+            class="error elevation-1"
+            @click="desativar = !desativar"
+            >Não
+            </span>
+          </v-btn>
+        </v-flex>
+      </v-layout>
     </v-card-text>
     </v-card>
     <br><br>
@@ -230,6 +261,7 @@ export default {
   data () {
     return {
       editar: false,
+      desativar: false,
       deletar: false,
       teletipos: ['Fixo', 'Celular'],
       estados: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
@@ -324,6 +356,12 @@ export default {
       this.$store.dispatch('editarDentista', payloadDentista)
       this.editar = !this.editar
       this.$router.push('/dentista/' + this.id)
+      this.$store.dispatch('todosDentistas')
+      window.scrollTo(0, 0)
+    },
+    desativarDentista () {
+      this.$store.dispatch('desativarDentista', this.id)
+      this.$router.push('/dentistas/')
       this.$store.dispatch('todosDentistas')
       window.scrollTo(0, 0)
     }

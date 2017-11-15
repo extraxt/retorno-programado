@@ -52,7 +52,7 @@
     },
     computed: {
       todosDentistas () {
-        return this.$store.getters.todosDentistas
+        return this.$store.getters.todosDentistasSemDesativados
       }
     },
     created () {

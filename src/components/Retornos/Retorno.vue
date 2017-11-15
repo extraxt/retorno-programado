@@ -60,7 +60,7 @@
           <v-layout row justify-center>
             <v-flex xs12 sm12 md6>
               <p class="mb-0">Dentista:</p>
-              <h5><b>{{ unicoDentista.nome }}</b></h5>
+              <h5><b>{{ unicoDentista.nome }}  {{ unicoDentista.ativo ? '' : 'DESATIVADO(A)' }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row v-if="unicoRetorno.obs" justify-center>
@@ -405,8 +405,8 @@ export default {
       if (this.retornorisco !== this.unicoRetorno.risco) {
         payloadRetorno.risco = this.retornorisco
       }
-      if (this.retornodent !== this.unicoRetorno.dentista) {
-        payloadRetorno.dentista = this.retornodent
+      if (this.retornodentid !== this.unicoRetorno.dentista) {
+        payloadRetorno.dentistaid = this.retornodentid
       }
       if (this.retornocliid !== this.unicoRetorno.clinica) {
         payloadRetorno.clinicaid = this.retornocliid

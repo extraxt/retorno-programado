@@ -27,7 +27,8 @@ export default {
         endereco: payload.dentendereco,
         cidade: payload.dentcidade,
         estado: payload.dentestado,
-        obs: payload.dentobs
+        obs: payload.dentobs,
+        ativo: true
       }
       firebase.database().ref(usuarioId + '/dentistas').push(dadosDentista)
       .then(data => {
@@ -59,7 +60,8 @@ export default {
             endereco: obj[key].endereco,
             cidade: obj[key].cidade,
             estado: obj[key].estado,
-            obs: obj[key].obs
+            obs: obj[key].obs,
+            ativo: obj[key].ativo
           })
         }
         commit('todosDentistas', todosDentistas)
@@ -112,11 +114,35 @@ export default {
         console.log(error)
         commit('setLoading', false)
       })
+    },
+    desativarDentista ({ commit, getters }, payload) {
+      commit('setLoading', true)
+      const usuarioId = getters.user.id
+      const updateObj = {}
+      updateObj.ativo = false
+      firebase.database().ref(usuarioId + '/dentistas').child(payload).update(updateObj)
+      .then(() => {
+        commit('setLoading', false)
+      })
+      .catch(error => {
+        console.log(error)
+        commit('setLoading', false)
+      })
     }
   },
   getters: {
     todosDentistas (state) {
       return state.todosDentistas
+    },
+    todosDentistasSemDesativados (state) {
+      const todosDentistasTodos = state.todosDentistas
+      const semDesativados = []
+      for (let key in todosDentistasTodos) {
+        if (todosDentistasTodos[key].ativo) {
+          semDesativados.push(todosDentistasTodos[key])
+        }
+      }
+      return semDesativados
     },
     unicoDentista (state) {
       return (dentistaId) => {
@@ -129,10 +155,31 @@ export default {
       const obj = state.todosDentistas
       const array = []
       for (let key in obj) {
-        array.push({
-          text: obj[key].nome,
-          value: obj[key].id
-        })
+        let ativo = 'DESATIVADO(A)'
+        if (obj[key].ativo) {
+          array.push({
+            text: obj[key].nome,
+            value: obj[key].id
+          })
+        } else {
+          array.push({
+            text: obj[key].nome + ' ' + ativo,
+            value: obj[key].id
+          })
+        }
+      }
+      return array
+    },
+    filtradoDentistasSemDesativados (state) {
+      const obj = state.todosDentistas
+      const array = []
+      for (let key in obj) {
+        if (obj[key.ativo]) {
+          array.push({
+            text: obj[key].nome,
+            value: obj[key].id
+          })
+        }
       }
       return array
     }
