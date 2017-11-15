@@ -67,6 +67,18 @@ export default {
         commit('setLoading', false)
       })
     },
+    deletarDentista ({commit, getters}, payload) {
+      commit('setLoading', true)
+      const usuarioId = getters.user.id
+      firebase.database().ref(usuarioId + '/dentistas').child(payload.id).update(null)
+      .then(() => {
+        commit('setLoading', false)
+      })
+      .catch(error => {
+        console.log(error)
+        commit('setLoading', false)
+      })
+    },
     editarDentista ({commit, getters}, payload) {
       commit('setLoading', true)
       const usuarioId = getters.user.id

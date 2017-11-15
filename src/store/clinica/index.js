@@ -24,7 +24,8 @@ export default {
         endereco: payload.clinendereco,
         cidade: payload.clincidade,
         estado: payload.clinestado,
-        obs: payload.clinobs
+        obs: payload.clinobs,
+        ativo: true
       }
       firebase.database().ref(usuarioId + '/clinicas').push(dadosClinica)
       .then(data => {
@@ -45,19 +46,21 @@ export default {
         const todasClinicas = []
         const obj = data.val()
         for (let key in obj) {
-          todasClinicas.push({
-            id: key,
-            nome: obj[key].nome,
-            telefone1: obj[key].telefone1,
-            teletipo1: obj[key].teletipo1,
-            telefone2: obj[key].telefone2,
-            teletipo2: obj[key].teletipo2,
-            email: obj[key].email,
-            endereco: obj[key].endereco,
-            cidade: obj[key].cidade,
-            estado: obj[key].estado,
-            obs: obj[key].obs
-          })
+          if (obj[key].ativo) {
+            todasClinicas.push({
+              id: key,
+              nome: obj[key].nome,
+              telefone1: obj[key].telefone1,
+              teletipo1: obj[key].teletipo1,
+              telefone2: obj[key].telefone2,
+              teletipo2: obj[key].teletipo2,
+              email: obj[key].email,
+              endereco: obj[key].endereco,
+              cidade: obj[key].cidade,
+              estado: obj[key].estado,
+              obs: obj[key].obs
+            })
+          }
         }
         commit('todasClinicas', todasClinicas)
         commit('setLoading', false)
@@ -102,6 +105,20 @@ export default {
         updateObj.obs = payload.obs
       }
       firebase.database().ref(usuarioId + '/clinicas').child(payload.id).update(updateObj)
+      .then(() => {
+        commit('setLoading', false)
+      })
+      .catch(error => {
+        console.log(error)
+        commit('setLoading', false)
+      })
+    },
+    desativarClinica ({ commit, getters }, payload) {
+      commit('setLoading', true)
+      const usuarioId = getters.user.id
+      const updateObj = {}
+      updateObj.ativo = false
+      firebase.database().ref(usuarioId + '/clinicas').child(payload).update(updateObj)
       .then(() => {
         commit('setLoading', false)
       })

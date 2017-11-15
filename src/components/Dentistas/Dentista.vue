@@ -84,7 +84,7 @@
       <v-layout row>
       <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2>
         <v-btn
-          class="error mb-4 elevation-1"
+          class="warning mb-4 elevation-1"
           type="submit"
           @click="editar=!editar"
           :loading="loading">CANCELAR EDIÇÃO
@@ -230,6 +230,7 @@ export default {
   data () {
     return {
       editar: false,
+      deletar: false,
       teletipos: ['Fixo', 'Celular'],
       estados: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'],
       telefone: '(99)999999999',
@@ -325,10 +326,10 @@ export default {
       this.$router.push('/dentista/' + this.id)
       this.$store.dispatch('todosDentistas')
       window.scrollTo(0, 0)
-    },
-    created () {
-      window.scrollTo(0, 0)
     }
+  },
+  created () {
+    window.scrollTo(0, 0)
   }
 }
 </script>
