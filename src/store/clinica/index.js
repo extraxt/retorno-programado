@@ -57,7 +57,8 @@ export default {
             endereco: obj[key].endereco,
             cidade: obj[key].cidade,
             estado: obj[key].estado,
-            obs: obj[key].obs
+            obs: obj[key].obs,
+            ativo: obj[key].ativo
           })
         }
         commit('todasClinicas', todasClinicas)

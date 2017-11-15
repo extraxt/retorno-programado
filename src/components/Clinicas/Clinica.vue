@@ -7,7 +7,7 @@
       </div>
     </v-card-title>
     <v-card-text v-if="!editar">
-        <v-layout justify-center row v-if="unicaClinica.ativo">
+        <v-layout justify-center row v-if="!unicaClinica.ativo">
           <h4 class="red--text">REGISTRO DESATIVADO.</h4>
         </v-layout>
         <v-layout row>
