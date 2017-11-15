@@ -73,7 +73,7 @@
             <v-flex xs12 sm12 md6 class="text-xs-center">
               <v-btn
                 small
-                class="primary"
+                class="primary elevation-1"
                 @click="editarUnicoRetorno"
                 :loading="loading">Editar Dados
                 <span slot="loader" class="custom-loader">

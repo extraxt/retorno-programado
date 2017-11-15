@@ -66,7 +66,7 @@
           <v-layout row>
             <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2>
               <v-btn
-                class="primary"
+                class="primary elevation-1"
                 :loading="loading"
                 @click="editarUnicoDentista"
                 >Editar Dados
@@ -84,7 +84,7 @@
       <v-layout row>
       <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2>
         <v-btn
-          class="error mb-4"
+          class="error mb-4 elevation-1"
           type="submit"
           @click="editar=!editar"
           :loading="loading">CANCELAR EDIÇÃO
@@ -202,7 +202,7 @@
             <v-layout row>
                 <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2>
                 <v-btn
-                    class="primary"
+                    class="primary elevation-1"
                     type="submit"
                     :loading="loading"
                     :disabled="!formValido">Atualizar Dados
