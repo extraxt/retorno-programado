@@ -19,6 +19,7 @@
                 label="Nome do Dentista"
                 id="nome"
                 placeholder="Ex.: Rafael de Oliveira"
+                clearable
                 required></v-text-field>
             </v-flex>
           </v-layout>
@@ -31,10 +32,11 @@
                 id="telefone1"
                 prepend-icon="phone"
                 v-mask="telefone"
+                clearable
                 required></v-text-field>
             </v-flex>
             <v-flex xs4 sm4>
-              <v-select v-bind:items="teletipos" v-model="dentteletipo1" label="Tipo:" required>
+              <v-select v-bind:items="teletipos" v-model="dentteletipo1" clearable label="Tipo:" required>
               </v-select>
             </v-flex>
           </v-layout>
@@ -47,10 +49,11 @@
                 id="telefone2"
                 prepend-icon="phone"
                 v-mask="telefone"
+                clearable
                 ></v-text-field>
             </v-flex>
             <v-flex xs4 sm4>
-              <v-select v-bind:items="teletipos" v-model="dentteletipo2" label="Tipo:">
+              <v-select v-bind:items="teletipos" v-model="dentteletipo2" clearable label="Tipo:">
               </v-select>
             </v-flex>
           </v-layout>
@@ -62,6 +65,7 @@
                 id="email"
                 type="email"
                 v-model="dentemail"
+                clearable
                 placeholder="email-do-dentista@gmail.com"
                 hint="Ex.: email-do-dentista@gmail.com"
                 ></v-text-field>
@@ -74,6 +78,7 @@
                 label="Endereço do Dentista"
                 id="endereco"
                 v-model="dentendereco"
+                clearable
                 hint="Ex.: Rua das Flores, 123 - Centro"
               ></v-text-field>
             </v-flex>
@@ -86,11 +91,12 @@
                 id="cidade"
                 v-model="dentcidade"
                 hint="Ex.: Lapa"
+                clearable
                 required
               ></v-text-field>
             </v-flex>
             <v-flex xs4 sm4>
-              <v-select v-model="dentestado" v-bind:items="estados" label="Estado" required></v-select>
+              <v-select v-model="dentestado" v-bind:items="estados" label="Estado" clearable required></v-select>
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -100,6 +106,7 @@
                 label="Observações Gerais"
                 id="observacoes"
                 v-model="dentobs"
+                clearable
                 placeholder="Alguma informação a mais?"
                 multi-line
               ></v-text-field>
@@ -152,10 +159,20 @@ export default {
   computed: {
     formValido () {
       return this.dentnome !== '' &&
+      this.dentnome !== undefined &&
+      this.dentnome !== null &&
       this.denttelefone1 !== '' &&
+      this.denttelefone1 !== undefined &&
+      this.denttelefone1 !== null &&
       this.dentteletipo1 !== '' &&
+      this.dentteletipo1 !== undefined &&
+      this.dentteletipo1 !== null &&
       this.dentcidade !== '' &&
-      this.dentestado !== ''
+      this.dentcidade !== undefined &&
+      this.dentcidade !== null &&
+      this.dentestado !== '' &&
+      this.dentestado !== undefined &&
+      this.dentestado !== null
     },
     loading () {
       return this.$store.getters.loading
