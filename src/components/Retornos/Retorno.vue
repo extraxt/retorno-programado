@@ -90,7 +90,7 @@
       <v-layout row>
         <v-flex class="text-xs-center" xs12 sm10 offset-sm1 md8 offset-md2>
           <v-btn
-            class="error mb-4"
+            class="error mb-4 elevation-1"
             type="submit"
             @click="editar=!editar"
             :loading="loading">CANCELAR EDIÇÃO
@@ -237,6 +237,7 @@
                   id="observacoes"
                   v-model="retornoobs"
                   placeholder="Alguma informação a mais?"
+                  clearable
                   multi-line
                 ></v-text-field>
               </v-flex>
@@ -244,7 +245,7 @@
             <v-layout row justify-center>
               <v-flex xs12 sm12 md6 class="text-xs-center">
                 <v-btn
-                  class="primary"
+                  class="primary elevation-1"
                   type="submit"
                   :loading="loading"
                   :disabled="!formValido">Atualizar Dados
@@ -348,11 +349,23 @@ export default {
     },
     formValido () {
       return this.retornotit !== '' &&
+      this.retornotit !== undefined &&
+      this.retornotit !== null &&
       this.retornopac !== '' &&
+      this.retornopac !== undefined &&
+      this.retornopac !== null &&
       this.retornotempo !== '' &&
+      this.retornotempo !== undefined &&
+      this.retornotempo !== null &&
       this.retornocat !== '' &&
-      this.retornodent !== '' &&
-      this.retornocliid !== ''
+      this.retornocat !== undefined &&
+      this.retornocat !== null &&
+      this.retornodentid !== '' &&
+      this.retornodentid !== undefined &&
+      this.retornodentid !== null &&
+      this.retornocliid !== '' &&
+      this.retornocliid !== undefined &&
+      this.retornocliid !== null
     },
     loading () {
       return this.$store.getters.loading

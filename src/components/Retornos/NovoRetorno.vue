@@ -146,13 +146,14 @@
                 v-model="retornoobs"
                 placeholder="Alguma informação a mais?"
                 multi-line
+                clearable
               ></v-text-field>
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
             <v-flex xs12 sm12 md6 class="text-xs-center">
               <v-btn
-                class="primary"
+                class="primary elevation-1"
                 type="submit"
                 :loading="loading"
                 :disabled="!formValido">Cadastrar Retorno
@@ -241,11 +242,23 @@ export default {
     },
     formValido () {
       return this.retornotit !== '' &&
+      this.retornotit !== undefined &&
+      this.retornotit !== null &&
       this.retornopac !== '' &&
+      this.retornopac !== undefined &&
+      this.retornopac !== null &&
       this.retornotempo !== '' &&
+      this.retornotempo !== undefined &&
+      this.retornotempo !== null &&
       this.retornocat !== '' &&
+      this.retornocat !== undefined &&
+      this.retornocat !== null &&
       this.retornodentid !== '' &&
-      this.retornocliid !== ''
+      this.retornodentid !== undefined &&
+      this.retornodentid !== null &&
+      this.retornocliid !== '' &&
+      this.retornocliid !== undefined &&
+      this.retornocliid !== null
     },
     loading () {
       return this.$store.getters.loading
