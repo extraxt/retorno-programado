@@ -285,6 +285,9 @@ export default {
       this.$store.dispatch('todosRetornos')
       this.$router.push('/retornos')
     }
+  },
+  created () {
+    window.scrollTo(0, 0)
   }
 }
 </script>

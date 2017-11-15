@@ -325,6 +325,9 @@ export default {
       this.$router.push('/clinica/' + this.id)
       this.$store.dispatch('todasClinicas')
     }
+  },
+  created () {
+    window.scrollTo(0, 0)
   }
 }
 </script>

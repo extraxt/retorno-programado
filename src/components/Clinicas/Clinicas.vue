@@ -54,6 +54,9 @@
       todasClinicas () {
         return this.$store.getters.todasClinicas
       }
+    },
+    created () {
+      window.scrollTo(0, 0)
     }
   }
 </script>

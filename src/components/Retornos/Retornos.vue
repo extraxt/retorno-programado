@@ -63,6 +63,9 @@ export default {
     filtradoRetornos () {
       return this.$store.getters.filtradoRetornos
     }
+  },
+  created () {
+    window.scrollTo(0, 0)
   }
 }
 </script>

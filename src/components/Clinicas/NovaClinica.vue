@@ -204,6 +204,9 @@ export default {
       this.$store.dispatch('todasClinicas')
       this.$router.push('/clinicas')
     }
+  },
+  created () {
+    window.scrollTo(0, 0)
   }
 }
 </script>

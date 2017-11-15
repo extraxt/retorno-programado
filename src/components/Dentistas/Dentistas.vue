@@ -54,6 +54,9 @@
       todosDentistas () {
         return this.$store.getters.todosDentistas
       }
+    },
+    created () {
+      window.scrollTo(0, 0)
     }
   }
 </script>

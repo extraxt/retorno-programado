@@ -203,6 +203,9 @@ export default {
       this.$store.dispatch('todosDentistas')
       this.$router.push('/dentistas')
     }
+  },
+  created () {
+    window.scrollTo(0, 0)
   }
 }
 </script>

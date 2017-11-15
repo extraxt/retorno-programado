@@ -33,7 +33,7 @@
           </v-layout>
           <v-layout row v-if="unicoPaciente.telefone2">
             <v-flex xs8 sm6 offset-sm1 md4 offset-md2 mr-2>
-              <p> class="mb-0"Telefone:</p>
+              <p class="mb-0">Telefone:</p>
               <h5><b>{{ unicoPaciente.telefone2 }}</b></h5>
             </v-flex>
             <v-flex xs4 sm4>
@@ -404,6 +404,9 @@ export default {
       this.$router.push('/paciente/' + this.id)
       this.$store.dispatch('todosPacientes')
     }
+  },
+  created () {
+    window.scrollTo(0, 0)
   }
 }
 </script>

@@ -54,6 +54,9 @@
       todosPacientes () {
         return this.$store.getters.todosPacientes
       }
+    },
+    created () {
+      window.scrollTo(0, 0)
     }
   }
 </script>

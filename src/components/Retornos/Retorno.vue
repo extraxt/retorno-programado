@@ -419,6 +419,9 @@ export default {
       this.$router.push('/retorno/' + this.id)
       this.$store.dispatch('todosRetornos')
     }
+  },
+  created () {
+    window.scrollTo(0, 0)
   }
 }
 </script>

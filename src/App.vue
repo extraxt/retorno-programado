@@ -1,6 +1,7 @@
 <template>
   <v-app class="application--toolbar application--footer application--footer-fixed">
     <v-navigation-drawer temporary app dark v-model="sideNav" width="200">
+      <div class="mt-5"></div>
       <v-list>
         <v-list-tile
           v-for="item in menuItems"
@@ -21,7 +22,7 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar flat dense dark class="primary">
+    <v-toolbar flat dense dark fixed class="primary" style="z-index: 300;">
       <span class="hidden-md-and-up">
         <v-toolbar-side-icon class="white blue--text"
         @click.stop="sideNav = !sideNav"></v-toolbar-side-icon>  
@@ -48,6 +49,7 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
+    <div class="mt-5"></div>
     <main>
       <router-view></router-view>
     </main>
@@ -91,6 +93,9 @@
         this.$store.dispatch('logout')
         this.$router.push('/')
       }
+    },
+    created () {
+      window.scrollTo(0, 0)
     }
   }
 </script>

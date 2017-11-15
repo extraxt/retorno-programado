@@ -255,6 +255,9 @@ export default {
       this.$store.dispatch('todosPacientes')
       this.$router.push('/pacientes')
     }
+  },
+  created () {
+    window.scrollTo(0, 0)
   }
 }
 </script>
