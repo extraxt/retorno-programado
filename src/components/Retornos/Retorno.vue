@@ -18,7 +18,7 @@
           <v-layout row justify-center>
             <v-flex xs12 sm12 md6>
               <p class="mb-0">Paciente:</p>
-              <h5><b>{{ unicoPaciente.nome }} {{ unicoPaciente.ativo ? '' : 'DESATIVADO(A)' }}</b></h5>
+              <h5><b>{{ unicoPaciente.nome }} {{ unicoPaciente.ativo ? '' : ' DESATIVADO(A)' }}</b></h5>
             </v-flex>
           </v-layout>
           <v-layout row justify-center>
